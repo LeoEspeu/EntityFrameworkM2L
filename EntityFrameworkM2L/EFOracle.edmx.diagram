@@ -46,6 +46,10 @@
         <AssociationConnector Association="M2LModel.FK_PARTICIPER_VACATION" ManuallyRouted="false" />
         <AssociationConnector Association="M2LModel.ETREPRESENT" ManuallyRouted="false" />
         <AssociationConnector Association="M2LModel.INCLUREACCOMPAGNANT" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="M2LModel.VCATEGORIECHAMBRE01" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="M2LModel.VDATENUITE01" Width="1.5" PointX="8.375" PointY="3.75" />
+        <EntityTypeShape EntityType="M2LModel.VHOTEL01" Width="1.5" PointX="8.375" PointY="6.75" />
+        <EntityTypeShape EntityType="M2LModel.VRESTAURATION01" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

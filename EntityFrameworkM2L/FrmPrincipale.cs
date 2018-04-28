@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using ComposantNuite;
 
 namespace EntityFrameworkM2L
 {
@@ -36,9 +37,9 @@ namespace EntityFrameworkM2L
             UneConnexion = new bdd();
             var lesAteliers = UneConnexion.FindAtelier();
             var lesQualites = UneConnexion.FindQualite();
-            Utilitaire.RemplirComboBox(lesQualites, this.CmbQualiteLicenciee);
-
-            //On remplit les Objets graphiques (listbox,combobox) avec les données de la bdd
+            Utilitaire.RemplirComboBox(lesQualites, this.CmbQualiteLicenciee,"qualite");
+            Utilitaire.RemplirListBox(lesAteliers, this.LsbAtelierLicencie, "atelier");
+            Utilitaire.CreerDesControles(this, UneConnexion, "restauration", "ChkRepasL_", PanRepasLicencie, "CheckBox");
         }
 
         private void BtnQuitter_Click(object sender, EventArgs e)
@@ -46,6 +47,27 @@ namespace EntityFrameworkM2L
             if (MessageBox.Show("Voulez-vous quitter l'application ?","Maison des ligues", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 Application.Exit();
+            }
+        }
+
+        /// <summary>
+        /// Procédure qui gére la visibilité des contrôles du panel de choix de repas pour accompagnant de licencié 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RdbRepasLicencie_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Name == "RdbAccompagnantLicencieOui")
+            {
+                PanRepasLicencie.Visible = true;
+                TxtMontantCheque2.Enabled = true;
+                TxtNumeroCheque2.Enabled = true;
+            }
+            else
+            {
+                PanRepasLicencie.Visible = false;
+                TxtMontantCheque2.Enabled = false;
+                TxtNumeroCheque2.Enabled = false;
             }
         }
     }

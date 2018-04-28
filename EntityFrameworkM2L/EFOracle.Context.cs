@@ -45,5 +45,9 @@ namespace EntityFrameworkM2L
         public virtual DbSet<THEME> THEMEs { get; set; }
         public virtual DbSet<VACATION> VACATIONs { get; set; }
         public virtual DbSet<PARAMETRE> PARAMETRES { get; set; }
+        public virtual DbSet<VCATEGORIECHAMBRE01> VCATEGORIECHAMBRE01 { get; set; }
+        public virtual DbSet<VDATENUITE01> VDATENUITE01 { get; set; }
+        public virtual DbSet<VHOTEL01> VHOTEL01 { get; set; }
+        public virtual DbSet<VRESTAURATION01> VRESTAURATION01 { get; set; }
     }
 }

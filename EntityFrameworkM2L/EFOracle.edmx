@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="M2LModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="M2LModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ATELIER">
           <Key>
             <PropertyRef Name="ID" />
@@ -221,6 +221,44 @@ avertissement 6002: La table/vue 'MDLEF.PARAMETRES' n'a pas de clé primaire dé
           <Property Name="NUMERO" Type="number" Precision="1" Scale="0" Nullable="false" />
           <Property Name="HEUREDEBUT" Type="date" Nullable="false" />
           <Property Name="HEUREFIN" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'MDLEF.VCATEGORIECHAMBRE01' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VCATEGORIECHAMBRE01">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="LIBELLE" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="LIBELLE" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'MDLEF.VDATENUITE01' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VDATENUITE01">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="LIBELLE" Type="varchar2" MaxLength="77" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'MDLEF.VHOTEL01' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VHOTEL01">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="LIBELLE" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="LIBELLE" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'MDLEF.VRESTAURATION01' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VRESTAURATION01">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="LIBELLE" Type="varchar2" MaxLength="83" />
         </EntityType>
         <Association Name="FK_BENEVOLE_PARTICIPANT">
           <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="1">
@@ -564,6 +602,30 @@ avertissement 6002: La table/vue 'MDLEF.PARAMETRES' n'a pas de clé primaire dé
 "PARAMETRES"."NBATELIERMAX" AS "NBATELIERMAX"
 FROM "MDLEF"."PARAMETRES" "PARAMETRES"</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VCATEGORIECHAMBRE01" EntityType="Self.VCATEGORIECHAMBRE01" store:Type="Views" store:Schema="MDLEF">
+            <DefiningQuery>SELECT 
+"VCATEGORIECHAMBRE01"."ID" AS "ID", 
+"VCATEGORIECHAMBRE01"."LIBELLE" AS "LIBELLE"
+FROM "MDLEF"."VCATEGORIECHAMBRE01" "VCATEGORIECHAMBRE01"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VDATENUITE01" EntityType="Self.VDATENUITE01" store:Type="Views" store:Schema="MDLEF">
+            <DefiningQuery>SELECT 
+"VDATENUITE01"."ID" AS "ID", 
+"VDATENUITE01"."LIBELLE" AS "LIBELLE"
+FROM "MDLEF"."VDATENUITE01" "VDATENUITE01"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VHOTEL01" EntityType="Self.VHOTEL01" store:Type="Views" store:Schema="MDLEF">
+            <DefiningQuery>SELECT 
+"VHOTEL01"."ID" AS "ID", 
+"VHOTEL01"."LIBELLE" AS "LIBELLE"
+FROM "MDLEF"."VHOTEL01" "VHOTEL01"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VRESTAURATION01" EntityType="Self.VRESTAURATION01" store:Type="Views" store:Schema="MDLEF">
+            <DefiningQuery>SELECT 
+"VRESTAURATION01"."ID" AS "ID", 
+"VRESTAURATION01"."LIBELLE" AS "LIBELLE"
+FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_BENEVOLE_PARTICIPANT" Association="Self.FK_BENEVOLE_PARTICIPANT">
             <End Role="PARTICIPANT" EntitySet="PARTICIPANT" />
             <End Role="BENEVOLE" EntitySet="BENEVOLE" />
@@ -657,8 +719,7 @@ FROM "MDLEF"."PARAMETRES" "PARAMETRES"</DefiningQuery>
             <End Role="VACATION" EntitySet="VACATION" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="M2LModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1264,7 +1325,41 @@ FROM "MDLEF"."PARAMETRES" "PARAMETRES"</DefiningQuery>
             <End Role="LICENCIE" EntitySet="LICENCIEs" />
             <End Role="RESTAURATION" EntitySet="RESTAURATIONs" />
           </AssociationSet>
+          <EntitySet Name="VCATEGORIECHAMBRE01" EntityType="M2LModel.VCATEGORIECHAMBRE01" />
+          <EntitySet Name="VDATENUITE01" EntityType="M2LModel.VDATENUITE01" />
+          <EntitySet Name="VHOTEL01" EntityType="M2LModel.VHOTEL01" />
+          <EntitySet Name="VRESTAURATION01" EntityType="M2LModel.VRESTAURATION01" />
         </EntityContainer>
+        <EntityType Name="VCATEGORIECHAMBRE01">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="LIBELLE" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LIBELLE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VDATENUITE01">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="LIBELLE" Type="String" MaxLength="77" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VHOTEL01">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="LIBELLE" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="LIBELLE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VRESTAURATION01">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Boolean" Nullable="false" />
+          <Property Name="LIBELLE" Type="String" MaxLength="83" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1489,6 +1584,38 @@ FROM "MDLEF"."PARAMETRES" "PARAMETRES"</DefiningQuery>
               <ScalarProperty Name="IDRESTAURATION" ColumnName="IDRESTAURATION" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="VCATEGORIECHAMBRE01">
+            <EntityTypeMapping TypeName="M2LModel.VCATEGORIECHAMBRE01">
+              <MappingFragment StoreEntitySet="VCATEGORIECHAMBRE01">
+                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VDATENUITE01">
+            <EntityTypeMapping TypeName="M2LModel.VDATENUITE01">
+              <MappingFragment StoreEntitySet="VDATENUITE01">
+                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VHOTEL01">
+            <EntityTypeMapping TypeName="M2LModel.VHOTEL01">
+              <MappingFragment StoreEntitySet="VHOTEL01">
+                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VRESTAURATION01">
+            <EntityTypeMapping TypeName="M2LModel.VRESTAURATION01">
+              <MappingFragment StoreEntitySet="VRESTAURATION01">
+                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

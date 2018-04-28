@@ -46,6 +46,13 @@ namespace EntityFrameworkM2L
             return NbParticipantAtelier;
         }
 
+        public object FindRestauration()
+        {
+            var requete = from VRESTAURATION01 in M2LContexte.VRESTAURATION01 select VRESTAURATION01;
+            var LesRestaurations = requete.ToList();
+            return LesRestaurations;
+        }
+
         public void FermerConnexion()
         {
             M2LContexte.Dispose();

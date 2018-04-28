@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ComposantNuite">
+      <HintPath>ComposantPerso\ComposantNuite.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -148,6 +151,18 @@
     </Compile>
     <Compile Include="Utilitaire.cs" />
     <Compile Include="VACATION.cs">
+      <DependentUpon>EFOracle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VCATEGORIECHAMBRE01.cs">
+      <DependentUpon>EFOracle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VDATENUITE01.cs">
+      <DependentUpon>EFOracle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VHOTEL01.cs">
+      <DependentUpon>EFOracle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VRESTAURATION01.cs">
       <DependentUpon>EFOracle.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FrmPrincipale.resx">

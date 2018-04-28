@@ -597,6 +597,7 @@
             this.RdbAccompagnantLicencieOui.TabIndex = 25;
             this.RdbAccompagnantLicencieOui.Text = "Oui";
             this.RdbAccompagnantLicencieOui.UseVisualStyleBackColor = true;
+            this.RdbAccompagnantLicencieOui.CheckedChanged += new System.EventHandler(this.RdbRepasLicencie_CheckedChanged);
             // 
             // RdbAccompagnantLicencieNon
             // 
@@ -615,6 +616,7 @@
             this.RdbAccompagnantLicencieNon.TabStop = true;
             this.RdbAccompagnantLicencieNon.Text = "Non";
             this.RdbAccompagnantLicencieNon.UseVisualStyleBackColor = true;
+            this.RdbAccompagnantLicencieNon.CheckedChanged += new System.EventHandler(this.RdbRepasLicencie_CheckedChanged);
             // 
             // FrmPrincipale
             // 
