@@ -1,0 +1,1515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="M2LModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ATELIER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="LIBELLEATELIER" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="NBPLACESMAXI" Type="number" Precision="3" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BENEVOLE">
+          <Key>
+            <PropertyRef Name="IDBENEVOLE" />
+          </Key>
+          <Property Name="IDBENEVOLE" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="NUMEROLICENCE" Type="number" Precision="12" Scale="0" />
+          <Property Name="DATENAISSANCE" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORIECHAMBRE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="LIBELLECATEGORIE" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONTENUHEBERGEMENT">
+          <Key>
+            <PropertyRef Name="IDPARTICIPANT" />
+            <PropertyRef Name="NUMORDRE" />
+          </Key>
+          <Property Name="IDPARTICIPANT" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="NUMORDRE" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="CODEHOTEL" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="IDCATEGORIE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IDDATEARRIVEENUITEE" Type="number" Precision="3" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DATEBENEVOLAT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="DATEBENEVOLAT" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DATENUITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="DATEARRIVEENUITEE" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ETREPRESENT">
+          <Key>
+            <PropertyRef Name="IDBENEVOLE" />
+            <PropertyRef Name="IDDATEPRESENT" />
+          </Key>
+          <Property Name="IDBENEVOLE" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDDATEPRESENT" Type="number" Precision="3" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HOTEL">
+          <Key>
+            <PropertyRef Name="CODEHOTEL" />
+          </Key>
+          <Property Name="CODEHOTEL" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="NOMHOTEL" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="ADRESSEHOTEL1" Type="varchar2" MaxLength="128" Nullable="false" />
+          <Property Name="ADRESSEHOTEL2" Type="varchar2" MaxLength="128" />
+          <Property Name="CPHOTEL" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="VILLEHOTEL" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="TELHOTEL" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="MAILHOTEL" Type="varchar2" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INCLUREACCOMPAGNANT">
+          <Key>
+            <PropertyRef Name="IDRESTAURATION" />
+            <PropertyRef Name="IDLICENCIE" />
+          </Key>
+          <Property Name="IDRESTAURATION" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="IDLICENCIE" Type="number" Precision="4" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INSCRIRE">
+          <Key>
+            <PropertyRef Name="IDPARTICIPANT" />
+            <PropertyRef Name="IDATELIER" />
+          </Key>
+          <Property Name="IDPARTICIPANT" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDATELIER" Type="number" Precision="5" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INTERVENANT">
+          <Key>
+            <PropertyRef Name="IDINTERVENANT" />
+          </Key>
+          <Property Name="IDINTERVENANT" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDATELIER" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="IDSTATUT" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LICENCIE">
+          <Key>
+            <PropertyRef Name="IDLICENCIE" />
+          </Key>
+          <Property Name="IDLICENCIE" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDQUALITE" Type="number" Precision="2" Scale="0" />
+          <Property Name="NUMEROLICENCE" Type="number" Precision="12" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAIEMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDLICENCIE" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="MONTANTCHEQUE" Type="number" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="NUMEROCHEQUE" Type="number" Precision="7" Scale="0" Nullable="false" />
+          <Property Name="TYPEPAIEMENT" Type="char" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'MDLEF.PARAMETRES' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="PARAMETRES">
+          <Key>
+            <PropertyRef Name="NOMDDL" />
+            <PropertyRef Name="ADRUE1" />
+            <PropertyRef Name="CP" />
+            <PropertyRef Name="VILLE" />
+            <PropertyRef Name="TEL" />
+            <PropertyRef Name="FAX" />
+            <PropertyRef Name="MAIL" />
+            <PropertyRef Name="TARIFINSCRIPTION" />
+            <PropertyRef Name="TARIFREPASACCOMPAGNANT" />
+            <PropertyRef Name="DUREE" />
+            <PropertyRef Name="NBATELIERMAX" />
+          </Key>
+          <Property Name="NOMDDL" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="ADRUE1" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="ADRUE2" Type="varchar2" MaxLength="60" />
+          <Property Name="CP" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="VILLE" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="TEL" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="FAX" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="MAIL" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="TARIFINSCRIPTION" Type="number" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="TARIFREPASACCOMPAGNANT" Type="number" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="DUREE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NBATELIERMAX" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PARTICIPANT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="NOMPARTICIPANT" Type="varchar2" MaxLength="40" Nullable="false" />
+          <Property Name="PRENOMPARTICIPANT" Type="varchar2" MaxLength="40" Nullable="false" />
+          <Property Name="ADRESSEPARTICIPANT1" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="ADRESSEPARTICIPANT2" Type="varchar2" MaxLength="60" />
+          <Property Name="CPPARTICIPANT" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="VILLEPARTICIPANT" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="TELPARTICIPANT" Type="char" MaxLength="15" />
+          <Property Name="MAILPARTICIPANT" Type="varchar2" MaxLength="60" />
+          <Property Name="DATEINSCRIPTION" Type="date" Nullable="false" />
+          <Property Name="DATEENREGISTREMENTARRIVEE" Type="date" />
+          <Property Name="CLEWIFI" Type="char" MaxLength="24" />
+        </EntityType>
+        <EntityType Name="PARTICIPER">
+          <Key>
+            <PropertyRef Name="IDLICENCIE" />
+            <PropertyRef Name="IDATELIER" />
+            <PropertyRef Name="NUMERO" />
+          </Key>
+          <Property Name="IDLICENCIE" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="IDATELIER" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="NUMERO" Type="number" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROPOSER">
+          <Key>
+            <PropertyRef Name="CODEHOTEL" />
+            <PropertyRef Name="IDCATEGORIE" />
+          </Key>
+          <Property Name="CODEHOTEL" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="IDCATEGORIE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="TARIFNUITE" Type="number" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QUALITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="LIBELLEQUALITE" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RESTAURATION">
+          <Key>
+            <PropertyRef Name="IDRESTAURATION" />
+          </Key>
+          <Property Name="IDRESTAURATION" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="DATERESTAURATION" Type="date" Nullable="false" />
+          <Property Name="TYPEREPAS" Type="char" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STATUT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="LIBELLESTATUT" Type="varchar2" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="THEME">
+          <Key>
+            <PropertyRef Name="IDATELIER" />
+            <PropertyRef Name="NUMERO" />
+          </Key>
+          <Property Name="IDATELIER" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="NUMERO" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="LIBELLETHEME" Type="varchar2" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VACATION">
+          <Key>
+            <PropertyRef Name="IDATELIER" />
+            <PropertyRef Name="NUMERO" />
+          </Key>
+          <Property Name="IDATELIER" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="NUMERO" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="HEUREDEBUT" Type="date" Nullable="false" />
+          <Property Name="HEUREFIN" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BENEVOLE_PARTICIPANT">
+          <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BENEVOLE" Type="Self.BENEVOLE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PARTICIPANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BENEVOLE">
+              <PropertyRef Name="IDBENEVOLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTENUHEBERGEMENT_CATEGORI">
+          <End Role="CATEGORIECHAMBRE" Type="Self.CATEGORIECHAMBRE" Multiplicity="1" />
+          <End Role="CONTENUHEBERGEMENT" Type="Self.CONTENUHEBERGEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIECHAMBRE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTENUHEBERGEMENT">
+              <PropertyRef Name="IDCATEGORIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTENUHEBERGEMENT_DATENUIT">
+          <End Role="DATENUITE" Type="Self.DATENUITE" Multiplicity="1" />
+          <End Role="CONTENUHEBERGEMENT" Type="Self.CONTENUHEBERGEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATENUITE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTENUHEBERGEMENT">
+              <PropertyRef Name="IDDATEARRIVEENUITEE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTENUHEBERGEMENT_HOTEL">
+          <End Role="HOTEL" Type="Self.HOTEL" Multiplicity="1" />
+          <End Role="CONTENUHEBERGEMENT" Type="Self.CONTENUHEBERGEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOTEL">
+              <PropertyRef Name="CODEHOTEL" />
+            </Principal>
+            <Dependent Role="CONTENUHEBERGEMENT">
+              <PropertyRef Name="CODEHOTEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTENUHEBERGEMENT_PARTICIP">
+          <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="1" />
+          <End Role="CONTENUHEBERGEMENT" Type="Self.CONTENUHEBERGEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTICIPANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTENUHEBERGEMENT">
+              <PropertyRef Name="IDPARTICIPANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ETREPRESENT_BENEVOLE">
+          <End Role="BENEVOLE" Type="Self.BENEVOLE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ETREPRESENT" Type="Self.ETREPRESENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BENEVOLE">
+              <PropertyRef Name="IDBENEVOLE" />
+            </Principal>
+            <Dependent Role="ETREPRESENT">
+              <PropertyRef Name="IDBENEVOLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ETREPRESENT_DATEBENEVOLAT">
+          <End Role="DATEBENEVOLAT" Type="Self.DATEBENEVOLAT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ETREPRESENT" Type="Self.ETREPRESENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATEBENEVOLAT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ETREPRESENT">
+              <PropertyRef Name="IDDATEPRESENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INCLUREACCOMPAGNANT_LICENCI">
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="INCLUREACCOMPAGNANT" Type="Self.INCLUREACCOMPAGNANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICENCIE">
+              <PropertyRef Name="IDLICENCIE" />
+            </Principal>
+            <Dependent Role="INCLUREACCOMPAGNANT">
+              <PropertyRef Name="IDLICENCIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INCLUREACCOMPAGNANT_RESTAUR">
+          <End Role="RESTAURATION" Type="Self.RESTAURATION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="INCLUREACCOMPAGNANT" Type="Self.INCLUREACCOMPAGNANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURATION">
+              <PropertyRef Name="IDRESTAURATION" />
+            </Principal>
+            <Dependent Role="INCLUREACCOMPAGNANT">
+              <PropertyRef Name="IDRESTAURATION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INSCRIRE_ATELIER">
+          <End Role="ATELIER" Type="Self.ATELIER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="INSCRIRE" Type="Self.INSCRIRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATELIER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INSCRIRE">
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INSCRIRE_LICENCIE">
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="INSCRIRE" Type="Self.INSCRIRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICENCIE">
+              <PropertyRef Name="IDLICENCIE" />
+            </Principal>
+            <Dependent Role="INSCRIRE">
+              <PropertyRef Name="IDPARTICIPANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INTERVENANT_ATELIER">
+          <End Role="ATELIER" Type="Self.ATELIER" Multiplicity="1" />
+          <End Role="INTERVENANT" Type="Self.INTERVENANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATELIER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INTERVENANT">
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INTERVENANT_PARTICIPANT">
+          <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="INTERVENANT" Type="Self.INTERVENANT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PARTICIPANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INTERVENANT">
+              <PropertyRef Name="IDINTERVENANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INTERVENANT_STATUT">
+          <End Role="STATUT" Type="Self.STATUT" Multiplicity="1" />
+          <End Role="INTERVENANT" Type="Self.INTERVENANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INTERVENANT">
+              <PropertyRef Name="IDSTATUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICENCIE_PARTICIPANT">
+          <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PARTICIPANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LICENCIE">
+              <PropertyRef Name="IDLICENCIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICENCIE_QUALITE">
+          <End Role="QUALITE" Type="Self.QUALITE" Multiplicity="0..1" />
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUALITE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LICENCIE">
+              <PropertyRef Name="IDQUALITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAIEMENT_LICENCIE">
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="1" />
+          <End Role="PAIEMENT" Type="Self.PAIEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICENCIE">
+              <PropertyRef Name="IDLICENCIE" />
+            </Principal>
+            <Dependent Role="PAIEMENT">
+              <PropertyRef Name="IDLICENCIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PARTICIPER_INSCRIRE">
+          <End Role="INSCRIRE" Type="Self.INSCRIRE" Multiplicity="1" />
+          <End Role="PARTICIPER" Type="Self.PARTICIPER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSCRIRE">
+              <PropertyRef Name="IDPARTICIPANT" />
+              <PropertyRef Name="IDATELIER" />
+            </Principal>
+            <Dependent Role="PARTICIPER">
+              <PropertyRef Name="IDLICENCIE" />
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PARTICIPER_VACATION">
+          <End Role="VACATION" Type="Self.VACATION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PARTICIPER" Type="Self.PARTICIPER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VACATION">
+              <PropertyRef Name="IDATELIER" />
+              <PropertyRef Name="NUMERO" />
+            </Principal>
+            <Dependent Role="PARTICIPER">
+              <PropertyRef Name="IDATELIER" />
+              <PropertyRef Name="NUMERO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROPOSER_CATEGORIECHAMBRE">
+          <End Role="CATEGORIECHAMBRE" Type="Self.CATEGORIECHAMBRE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PROPOSER" Type="Self.PROPOSER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIECHAMBRE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPOSER">
+              <PropertyRef Name="IDCATEGORIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROPOSER_HOTEL">
+          <End Role="HOTEL" Type="Self.HOTEL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PROPOSER" Type="Self.PROPOSER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOTEL">
+              <PropertyRef Name="CODEHOTEL" />
+            </Principal>
+            <Dependent Role="PROPOSER">
+              <PropertyRef Name="CODEHOTEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THEME_ATELIER">
+          <End Role="ATELIER" Type="Self.ATELIER" Multiplicity="1" />
+          <End Role="THEME" Type="Self.THEME" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATELIER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THEME">
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VACATION_ATELIER">
+          <End Role="ATELIER" Type="Self.ATELIER" Multiplicity="1" />
+          <End Role="VACATION" Type="Self.VACATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATELIER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VACATION">
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="M2LModelStoreContainer">
+          <EntitySet Name="ATELIER" EntityType="Self.ATELIER" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="BENEVOLE" EntityType="Self.BENEVOLE" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="CATEGORIECHAMBRE" EntityType="Self.CATEGORIECHAMBRE" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="CONTENUHEBERGEMENT" EntityType="Self.CONTENUHEBERGEMENT" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="DATEBENEVOLAT" EntityType="Self.DATEBENEVOLAT" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="DATENUITE" EntityType="Self.DATENUITE" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="ETREPRESENT" EntityType="Self.ETREPRESENT" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="HOTEL" EntityType="Self.HOTEL" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="INCLUREACCOMPAGNANT" EntityType="Self.INCLUREACCOMPAGNANT" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="INSCRIRE" EntityType="Self.INSCRIRE" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="INTERVENANT" EntityType="Self.INTERVENANT" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="LICENCIE" EntityType="Self.LICENCIE" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="PAIEMENT" EntityType="Self.PAIEMENT" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="PARTICIPANT" EntityType="Self.PARTICIPANT" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="PARTICIPER" EntityType="Self.PARTICIPER" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="PROPOSER" EntityType="Self.PROPOSER" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="QUALITE" EntityType="Self.QUALITE" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="RESTAURATION" EntityType="Self.RESTAURATION" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="STATUT" EntityType="Self.STATUT" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="THEME" EntityType="Self.THEME" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="VACATION" EntityType="Self.VACATION" Schema="MDLEF" store:Type="Tables" />
+          <EntitySet Name="PARAMETRES" EntityType="Self.PARAMETRES" store:Type="Tables" store:Schema="MDLEF">
+            <DefiningQuery>SELECT 
+"PARAMETRES"."NOMDDL" AS "NOMDDL", 
+"PARAMETRES"."ADRUE1" AS "ADRUE1", 
+"PARAMETRES"."ADRUE2" AS "ADRUE2", 
+"PARAMETRES"."CP" AS "CP", 
+"PARAMETRES"."VILLE" AS "VILLE", 
+"PARAMETRES"."TEL" AS "TEL", 
+"PARAMETRES"."FAX" AS "FAX", 
+"PARAMETRES"."MAIL" AS "MAIL", 
+"PARAMETRES"."TARIFINSCRIPTION" AS "TARIFINSCRIPTION", 
+"PARAMETRES"."TARIFREPASACCOMPAGNANT" AS "TARIFREPASACCOMPAGNANT", 
+"PARAMETRES"."DUREE" AS "DUREE", 
+"PARAMETRES"."NBATELIERMAX" AS "NBATELIERMAX"
+FROM "MDLEF"."PARAMETRES" "PARAMETRES"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BENEVOLE_PARTICIPANT" Association="Self.FK_BENEVOLE_PARTICIPANT">
+            <End Role="PARTICIPANT" EntitySet="PARTICIPANT" />
+            <End Role="BENEVOLE" EntitySet="BENEVOLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTENUHEBERGEMENT_CATEGORI" Association="Self.FK_CONTENUHEBERGEMENT_CATEGORI">
+            <End Role="CATEGORIECHAMBRE" EntitySet="CATEGORIECHAMBRE" />
+            <End Role="CONTENUHEBERGEMENT" EntitySet="CONTENUHEBERGEMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTENUHEBERGEMENT_DATENUIT" Association="Self.FK_CONTENUHEBERGEMENT_DATENUIT">
+            <End Role="DATENUITE" EntitySet="DATENUITE" />
+            <End Role="CONTENUHEBERGEMENT" EntitySet="CONTENUHEBERGEMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTENUHEBERGEMENT_HOTEL" Association="Self.FK_CONTENUHEBERGEMENT_HOTEL">
+            <End Role="HOTEL" EntitySet="HOTEL" />
+            <End Role="CONTENUHEBERGEMENT" EntitySet="CONTENUHEBERGEMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTENUHEBERGEMENT_PARTICIP" Association="Self.FK_CONTENUHEBERGEMENT_PARTICIP">
+            <End Role="PARTICIPANT" EntitySet="PARTICIPANT" />
+            <End Role="CONTENUHEBERGEMENT" EntitySet="CONTENUHEBERGEMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ETREPRESENT_BENEVOLE" Association="Self.FK_ETREPRESENT_BENEVOLE">
+            <End Role="BENEVOLE" EntitySet="BENEVOLE" />
+            <End Role="ETREPRESENT" EntitySet="ETREPRESENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ETREPRESENT_DATEBENEVOLAT" Association="Self.FK_ETREPRESENT_DATEBENEVOLAT">
+            <End Role="DATEBENEVOLAT" EntitySet="DATEBENEVOLAT" />
+            <End Role="ETREPRESENT" EntitySet="ETREPRESENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INCLUREACCOMPAGNANT_LICENCI" Association="Self.FK_INCLUREACCOMPAGNANT_LICENCI">
+            <End Role="LICENCIE" EntitySet="LICENCIE" />
+            <End Role="INCLUREACCOMPAGNANT" EntitySet="INCLUREACCOMPAGNANT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INCLUREACCOMPAGNANT_RESTAUR" Association="Self.FK_INCLUREACCOMPAGNANT_RESTAUR">
+            <End Role="RESTAURATION" EntitySet="RESTAURATION" />
+            <End Role="INCLUREACCOMPAGNANT" EntitySet="INCLUREACCOMPAGNANT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INSCRIRE_ATELIER" Association="Self.FK_INSCRIRE_ATELIER">
+            <End Role="ATELIER" EntitySet="ATELIER" />
+            <End Role="INSCRIRE" EntitySet="INSCRIRE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INSCRIRE_LICENCIE" Association="Self.FK_INSCRIRE_LICENCIE">
+            <End Role="LICENCIE" EntitySet="LICENCIE" />
+            <End Role="INSCRIRE" EntitySet="INSCRIRE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INTERVENANT_ATELIER" Association="Self.FK_INTERVENANT_ATELIER">
+            <End Role="ATELIER" EntitySet="ATELIER" />
+            <End Role="INTERVENANT" EntitySet="INTERVENANT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INTERVENANT_PARTICIPANT" Association="Self.FK_INTERVENANT_PARTICIPANT">
+            <End Role="PARTICIPANT" EntitySet="PARTICIPANT" />
+            <End Role="INTERVENANT" EntitySet="INTERVENANT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INTERVENANT_STATUT" Association="Self.FK_INTERVENANT_STATUT">
+            <End Role="STATUT" EntitySet="STATUT" />
+            <End Role="INTERVENANT" EntitySet="INTERVENANT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICENCIE_PARTICIPANT" Association="Self.FK_LICENCIE_PARTICIPANT">
+            <End Role="PARTICIPANT" EntitySet="PARTICIPANT" />
+            <End Role="LICENCIE" EntitySet="LICENCIE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICENCIE_QUALITE" Association="Self.FK_LICENCIE_QUALITE">
+            <End Role="QUALITE" EntitySet="QUALITE" />
+            <End Role="LICENCIE" EntitySet="LICENCIE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAIEMENT_LICENCIE" Association="Self.FK_PAIEMENT_LICENCIE">
+            <End Role="LICENCIE" EntitySet="LICENCIE" />
+            <End Role="PAIEMENT" EntitySet="PAIEMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PARTICIPER_INSCRIRE" Association="Self.FK_PARTICIPER_INSCRIRE">
+            <End Role="INSCRIRE" EntitySet="INSCRIRE" />
+            <End Role="PARTICIPER" EntitySet="PARTICIPER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PARTICIPER_VACATION" Association="Self.FK_PARTICIPER_VACATION">
+            <End Role="VACATION" EntitySet="VACATION" />
+            <End Role="PARTICIPER" EntitySet="PARTICIPER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROPOSER_CATEGORIECHAMBRE" Association="Self.FK_PROPOSER_CATEGORIECHAMBRE">
+            <End Role="CATEGORIECHAMBRE" EntitySet="CATEGORIECHAMBRE" />
+            <End Role="PROPOSER" EntitySet="PROPOSER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROPOSER_HOTEL" Association="Self.FK_PROPOSER_HOTEL">
+            <End Role="HOTEL" EntitySet="HOTEL" />
+            <End Role="PROPOSER" EntitySet="PROPOSER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THEME_ATELIER" Association="Self.FK_THEME_ATELIER">
+            <End Role="ATELIER" EntitySet="ATELIER" />
+            <End Role="THEME" EntitySet="THEME" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VACATION_ATELIER" Association="Self.FK_VACATION_ATELIER">
+            <End Role="ATELIER" EntitySet="ATELIER" />
+            <End Role="VACATION" EntitySet="VACATION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="M2LModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ATELIER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" />
+          <Property Name="LIBELLEATELIER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NBPLACESMAXI" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="INSCRIREs" Relationship="Self.FK_INSCRIRE_ATELIER" FromRole="ATELIER" ToRole="INSCRIRE" />
+          <NavigationProperty Name="INTERVENANTs" Relationship="Self.FK_INTERVENANT_ATELIER" FromRole="ATELIER" ToRole="INTERVENANT" />
+          <NavigationProperty Name="THEMEs" Relationship="Self.FK_THEME_ATELIER" FromRole="ATELIER" ToRole="THEME" />
+          <NavigationProperty Name="VACATIONs" Relationship="Self.FK_VACATION_ATELIER" FromRole="ATELIER" ToRole="VACATION" />
+        </EntityType>
+        <EntityType Name="BENEVOLE">
+          <Key>
+            <PropertyRef Name="IDBENEVOLE" />
+          </Key>
+          <Property Name="IDBENEVOLE" Type="Int16" Nullable="false" />
+          <Property Name="NUMEROLICENCE" Type="Int64" />
+          <Property Name="DATENAISSANCE" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="PARTICIPANT" Relationship="Self.FK_BENEVOLE_PARTICIPANT" FromRole="BENEVOLE" ToRole="PARTICIPANT" />
+          <NavigationProperty Name="DATEBENEVOLATs" Relationship="Self.ETREPRESENT" FromRole="BENEVOLE" ToRole="DATEBENEVOLAT" />
+        </EntityType>
+        <EntityType Name="CATEGORIECHAMBRE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LIBELLECATEGORIE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CONTENUHEBERGEMENTs" Relationship="Self.FK_CONTENUHEBERGEMENT_CATEGORI" FromRole="CATEGORIECHAMBRE" ToRole="CONTENUHEBERGEMENT" />
+          <NavigationProperty Name="PROPOSERs" Relationship="Self.FK_PROPOSER_CATEGORIECHAMBRE" FromRole="CATEGORIECHAMBRE" ToRole="PROPOSER" />
+        </EntityType>
+        <EntityType Name="CONTENUHEBERGEMENT">
+          <Key>
+            <PropertyRef Name="IDPARTICIPANT" />
+            <PropertyRef Name="NUMORDRE" />
+          </Key>
+          <Property Name="IDPARTICIPANT" Type="Int16" Nullable="false" />
+          <Property Name="NUMORDRE" Type="Boolean" Nullable="false" />
+          <Property Name="CODEHOTEL" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IDCATEGORIE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IDDATEARRIVEENUITEE" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="CATEGORIECHAMBRE" Relationship="Self.FK_CONTENUHEBERGEMENT_CATEGORI" FromRole="CONTENUHEBERGEMENT" ToRole="CATEGORIECHAMBRE" />
+          <NavigationProperty Name="DATENUITE" Relationship="Self.FK_CONTENUHEBERGEMENT_DATENUIT" FromRole="CONTENUHEBERGEMENT" ToRole="DATENUITE" />
+          <NavigationProperty Name="HOTEL" Relationship="Self.FK_CONTENUHEBERGEMENT_HOTEL" FromRole="CONTENUHEBERGEMENT" ToRole="HOTEL" />
+          <NavigationProperty Name="PARTICIPANT" Relationship="Self.FK_CONTENUHEBERGEMENT_PARTICIP" FromRole="CONTENUHEBERGEMENT" ToRole="PARTICIPANT" />
+        </EntityType>
+        <EntityType Name="DATEBENEVOLAT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="DATEBENEVOLAT1" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="BENEVOLEs" Relationship="Self.ETREPRESENT" FromRole="DATEBENEVOLAT" ToRole="BENEVOLE" />
+        </EntityType>
+        <EntityType Name="DATENUITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="DATEARRIVEENUITEE" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CONTENUHEBERGEMENTs" Relationship="Self.FK_CONTENUHEBERGEMENT_DATENUIT" FromRole="DATENUITE" ToRole="CONTENUHEBERGEMENT" />
+        </EntityType>
+        <EntityType Name="HOTEL">
+          <Key>
+            <PropertyRef Name="CODEHOTEL" />
+          </Key>
+          <Property Name="CODEHOTEL" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NOMHOTEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADRESSEHOTEL1" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADRESSEHOTEL2" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="CPHOTEL" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="VILLEHOTEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELHOTEL" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MAILHOTEL" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CONTENUHEBERGEMENTs" Relationship="Self.FK_CONTENUHEBERGEMENT_HOTEL" FromRole="HOTEL" ToRole="CONTENUHEBERGEMENT" />
+          <NavigationProperty Name="PROPOSERs" Relationship="Self.FK_PROPOSER_HOTEL" FromRole="HOTEL" ToRole="PROPOSER" />
+        </EntityType>
+        <EntityType Name="INSCRIRE">
+          <Key>
+            <PropertyRef Name="IDPARTICIPANT" />
+            <PropertyRef Name="IDATELIER" />
+          </Key>
+          <Property Name="IDPARTICIPANT" Type="Int16" Nullable="false" />
+          <Property Name="IDATELIER" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ATELIER" Relationship="Self.FK_INSCRIRE_ATELIER" FromRole="INSCRIRE" ToRole="ATELIER" />
+          <NavigationProperty Name="LICENCIE" Relationship="Self.FK_INSCRIRE_LICENCIE" FromRole="INSCRIRE" ToRole="LICENCIE" />
+          <NavigationProperty Name="PARTICIPERs" Relationship="Self.FK_PARTICIPER_INSCRIRE" FromRole="INSCRIRE" ToRole="PARTICIPER" />
+        </EntityType>
+        <EntityType Name="INTERVENANT">
+          <Key>
+            <PropertyRef Name="IDINTERVENANT" />
+          </Key>
+          <Property Name="IDINTERVENANT" Type="Int16" Nullable="false" />
+          <Property Name="IDATELIER" Type="Int16" Nullable="false" />
+          <Property Name="IDSTATUT" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ATELIER" Relationship="Self.FK_INTERVENANT_ATELIER" FromRole="INTERVENANT" ToRole="ATELIER" />
+          <NavigationProperty Name="PARTICIPANT" Relationship="Self.FK_INTERVENANT_PARTICIPANT" FromRole="INTERVENANT" ToRole="PARTICIPANT" />
+          <NavigationProperty Name="STATUT" Relationship="Self.FK_INTERVENANT_STATUT" FromRole="INTERVENANT" ToRole="STATUT" />
+        </EntityType>
+        <EntityType Name="LICENCIE">
+          <Key>
+            <PropertyRef Name="IDLICENCIE" />
+          </Key>
+          <Property Name="IDLICENCIE" Type="Int16" Nullable="false" />
+          <Property Name="IDQUALITE" Type="Byte" />
+          <Property Name="NUMEROLICENCE" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="INSCRIREs" Relationship="Self.FK_INSCRIRE_LICENCIE" FromRole="LICENCIE" ToRole="INSCRIRE" />
+          <NavigationProperty Name="PARTICIPANT" Relationship="Self.FK_LICENCIE_PARTICIPANT" FromRole="LICENCIE" ToRole="PARTICIPANT" />
+          <NavigationProperty Name="QUALITE" Relationship="Self.FK_LICENCIE_QUALITE" FromRole="LICENCIE" ToRole="QUALITE" />
+          <NavigationProperty Name="PAIEMENTs" Relationship="Self.FK_PAIEMENT_LICENCIE" FromRole="LICENCIE" ToRole="PAIEMENT" />
+          <NavigationProperty Name="RESTAURATIONs" Relationship="Self.INCLUREACCOMPAGNANT" FromRole="LICENCIE" ToRole="RESTAURATION" />
+        </EntityType>
+        <EntityType Name="PAIEMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" />
+          <Property Name="IDLICENCIE" Type="Int16" Nullable="false" />
+          <Property Name="MONTANTCHEQUE" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="NUMEROCHEQUE" Type="Int32" Nullable="false" />
+          <Property Name="TYPEPAIEMENT" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LICENCIE" Relationship="Self.FK_PAIEMENT_LICENCIE" FromRole="PAIEMENT" ToRole="LICENCIE" />
+        </EntityType>
+        <EntityType Name="PARTICIPANT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" />
+          <Property Name="NOMPARTICIPANT" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRENOMPARTICIPANT" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADRESSEPARTICIPANT1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADRESSEPARTICIPANT2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="CPPARTICIPANT" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="VILLEPARTICIPANT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELPARTICIPANT" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="MAILPARTICIPANT" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="DATEINSCRIPTION" Type="DateTime" Nullable="false" />
+          <Property Name="DATEENREGISTREMENTARRIVEE" Type="DateTime" />
+          <Property Name="CLEWIFI" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="BENEVOLE" Relationship="Self.FK_BENEVOLE_PARTICIPANT" FromRole="PARTICIPANT" ToRole="BENEVOLE" />
+          <NavigationProperty Name="CONTENUHEBERGEMENTs" Relationship="Self.FK_CONTENUHEBERGEMENT_PARTICIP" FromRole="PARTICIPANT" ToRole="CONTENUHEBERGEMENT" />
+          <NavigationProperty Name="INTERVENANT" Relationship="Self.FK_INTERVENANT_PARTICIPANT" FromRole="PARTICIPANT" ToRole="INTERVENANT" />
+          <NavigationProperty Name="LICENCIE" Relationship="Self.FK_LICENCIE_PARTICIPANT" FromRole="PARTICIPANT" ToRole="LICENCIE" />
+        </EntityType>
+        <EntityType Name="PARTICIPER">
+          <Key>
+            <PropertyRef Name="IDLICENCIE" />
+            <PropertyRef Name="IDATELIER" />
+            <PropertyRef Name="NUMERO" />
+          </Key>
+          <Property Name="IDLICENCIE" Type="Int16" Nullable="false" />
+          <Property Name="IDATELIER" Type="Int16" Nullable="false" />
+          <Property Name="NUMERO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="INSCRIRE" Relationship="Self.FK_PARTICIPER_INSCRIRE" FromRole="PARTICIPER" ToRole="INSCRIRE" />
+          <NavigationProperty Name="VACATION" Relationship="Self.FK_PARTICIPER_VACATION" FromRole="PARTICIPER" ToRole="VACATION" />
+        </EntityType>
+        <EntityType Name="PROPOSER">
+          <Key>
+            <PropertyRef Name="CODEHOTEL" />
+            <PropertyRef Name="IDCATEGORIE" />
+          </Key>
+          <Property Name="CODEHOTEL" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IDCATEGORIE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TARIFNUITE" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <NavigationProperty Name="CATEGORIECHAMBRE" Relationship="Self.FK_PROPOSER_CATEGORIECHAMBRE" FromRole="PROPOSER" ToRole="CATEGORIECHAMBRE" />
+          <NavigationProperty Name="HOTEL" Relationship="Self.FK_PROPOSER_HOTEL" FromRole="PROPOSER" ToRole="HOTEL" />
+        </EntityType>
+        <EntityType Name="QUALITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="LIBELLEQUALITE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LICENCIEs" Relationship="Self.FK_LICENCIE_QUALITE" FromRole="QUALITE" ToRole="LICENCIE" />
+        </EntityType>
+        <EntityType Name="RESTAURATION">
+          <Key>
+            <PropertyRef Name="IDRESTAURATION" />
+          </Key>
+          <Property Name="IDRESTAURATION" Type="Boolean" Nullable="false" />
+          <Property Name="DATERESTAURATION" Type="DateTime" Nullable="false" />
+          <Property Name="TYPEREPAS" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LICENCIEs" Relationship="Self.INCLUREACCOMPAGNANT" FromRole="RESTAURATION" ToRole="LICENCIE" />
+        </EntityType>
+        <EntityType Name="STATUT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LIBELLESTATUT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="INTERVENANTs" Relationship="Self.FK_INTERVENANT_STATUT" FromRole="STATUT" ToRole="INTERVENANT" />
+        </EntityType>
+        <EntityType Name="THEME">
+          <Key>
+            <PropertyRef Name="IDATELIER" />
+            <PropertyRef Name="NUMERO" />
+          </Key>
+          <Property Name="IDATELIER" Type="Int16" Nullable="false" />
+          <Property Name="NUMERO" Type="Boolean" Nullable="false" />
+          <Property Name="LIBELLETHEME" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ATELIER" Relationship="Self.FK_THEME_ATELIER" FromRole="THEME" ToRole="ATELIER" />
+        </EntityType>
+        <EntityType Name="VACATION">
+          <Key>
+            <PropertyRef Name="IDATELIER" />
+            <PropertyRef Name="NUMERO" />
+          </Key>
+          <Property Name="IDATELIER" Type="Int16" Nullable="false" />
+          <Property Name="NUMERO" Type="Boolean" Nullable="false" />
+          <Property Name="HEUREDEBUT" Type="DateTime" Nullable="false" />
+          <Property Name="HEUREFIN" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="ATELIER" Relationship="Self.FK_VACATION_ATELIER" FromRole="VACATION" ToRole="ATELIER" />
+          <NavigationProperty Name="PARTICIPERs" Relationship="Self.FK_PARTICIPER_VACATION" FromRole="VACATION" ToRole="PARTICIPER" />
+        </EntityType>
+        <EntityType Name="PARAMETRE">
+          <Key>
+            <PropertyRef Name="NOMDDL" />
+            <PropertyRef Name="ADRUE1" />
+            <PropertyRef Name="CP" />
+            <PropertyRef Name="VILLE" />
+            <PropertyRef Name="TEL" />
+            <PropertyRef Name="FAX" />
+            <PropertyRef Name="MAIL" />
+            <PropertyRef Name="TARIFINSCRIPTION" />
+            <PropertyRef Name="TARIFREPASACCOMPAGNANT" />
+            <PropertyRef Name="DUREE" />
+            <PropertyRef Name="NBATELIERMAX" />
+          </Key>
+          <Property Name="NOMDDL" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADRUE1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADRUE2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="CP" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="VILLE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEL" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FAX" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MAIL" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TARIFINSCRIPTION" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="TARIFREPASACCOMPAGNANT" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="DUREE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NBATELIERMAX" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_INSCRIRE_ATELIER">
+          <End Role="ATELIER" Type="Self.ATELIER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="INSCRIRE" Type="Self.INSCRIRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATELIER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INSCRIRE">
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INTERVENANT_ATELIER">
+          <End Role="ATELIER" Type="Self.ATELIER" Multiplicity="1" />
+          <End Role="INTERVENANT" Type="Self.INTERVENANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATELIER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INTERVENANT">
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THEME_ATELIER">
+          <End Role="ATELIER" Type="Self.ATELIER" Multiplicity="1" />
+          <End Role="THEME" Type="Self.THEME" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATELIER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THEME">
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VACATION_ATELIER">
+          <End Role="ATELIER" Type="Self.ATELIER" Multiplicity="1" />
+          <End Role="VACATION" Type="Self.VACATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATELIER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VACATION">
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BENEVOLE_PARTICIPANT">
+          <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BENEVOLE" Type="Self.BENEVOLE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PARTICIPANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BENEVOLE">
+              <PropertyRef Name="IDBENEVOLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTENUHEBERGEMENT_CATEGORI">
+          <End Role="CATEGORIECHAMBRE" Type="Self.CATEGORIECHAMBRE" Multiplicity="1" />
+          <End Role="CONTENUHEBERGEMENT" Type="Self.CONTENUHEBERGEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIECHAMBRE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTENUHEBERGEMENT">
+              <PropertyRef Name="IDCATEGORIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROPOSER_CATEGORIECHAMBRE">
+          <End Role="CATEGORIECHAMBRE" Type="Self.CATEGORIECHAMBRE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PROPOSER" Type="Self.PROPOSER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIECHAMBRE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROPOSER">
+              <PropertyRef Name="IDCATEGORIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTENUHEBERGEMENT_DATENUIT">
+          <End Role="DATENUITE" Type="Self.DATENUITE" Multiplicity="1" />
+          <End Role="CONTENUHEBERGEMENT" Type="Self.CONTENUHEBERGEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATENUITE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTENUHEBERGEMENT">
+              <PropertyRef Name="IDDATEARRIVEENUITEE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTENUHEBERGEMENT_HOTEL">
+          <End Role="HOTEL" Type="Self.HOTEL" Multiplicity="1" />
+          <End Role="CONTENUHEBERGEMENT" Type="Self.CONTENUHEBERGEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOTEL">
+              <PropertyRef Name="CODEHOTEL" />
+            </Principal>
+            <Dependent Role="CONTENUHEBERGEMENT">
+              <PropertyRef Name="CODEHOTEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTENUHEBERGEMENT_PARTICIP">
+          <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="1" />
+          <End Role="CONTENUHEBERGEMENT" Type="Self.CONTENUHEBERGEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARTICIPANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTENUHEBERGEMENT">
+              <PropertyRef Name="IDPARTICIPANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROPOSER_HOTEL">
+          <End Role="HOTEL" Type="Self.HOTEL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PROPOSER" Type="Self.PROPOSER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOTEL">
+              <PropertyRef Name="CODEHOTEL" />
+            </Principal>
+            <Dependent Role="PROPOSER">
+              <PropertyRef Name="CODEHOTEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INSCRIRE_LICENCIE">
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="INSCRIRE" Type="Self.INSCRIRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICENCIE">
+              <PropertyRef Name="IDLICENCIE" />
+            </Principal>
+            <Dependent Role="INSCRIRE">
+              <PropertyRef Name="IDPARTICIPANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PARTICIPER_INSCRIRE">
+          <End Role="INSCRIRE" Type="Self.INSCRIRE" Multiplicity="1" />
+          <End Role="PARTICIPER" Type="Self.PARTICIPER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSCRIRE">
+              <PropertyRef Name="IDPARTICIPANT" />
+              <PropertyRef Name="IDATELIER" />
+            </Principal>
+            <Dependent Role="PARTICIPER">
+              <PropertyRef Name="IDLICENCIE" />
+              <PropertyRef Name="IDATELIER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INTERVENANT_PARTICIPANT">
+          <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="INTERVENANT" Type="Self.INTERVENANT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PARTICIPANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INTERVENANT">
+              <PropertyRef Name="IDINTERVENANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INTERVENANT_STATUT">
+          <End Role="STATUT" Type="Self.STATUT" Multiplicity="1" />
+          <End Role="INTERVENANT" Type="Self.INTERVENANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INTERVENANT">
+              <PropertyRef Name="IDSTATUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICENCIE_PARTICIPANT">
+          <End Role="PARTICIPANT" Type="Self.PARTICIPANT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PARTICIPANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LICENCIE">
+              <PropertyRef Name="IDLICENCIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICENCIE_QUALITE">
+          <End Role="QUALITE" Type="Self.QUALITE" Multiplicity="0..1" />
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUALITE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LICENCIE">
+              <PropertyRef Name="IDQUALITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAIEMENT_LICENCIE">
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="1" />
+          <End Role="PAIEMENT" Type="Self.PAIEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICENCIE">
+              <PropertyRef Name="IDLICENCIE" />
+            </Principal>
+            <Dependent Role="PAIEMENT">
+              <PropertyRef Name="IDLICENCIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PARTICIPER_VACATION">
+          <End Role="VACATION" Type="Self.VACATION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PARTICIPER" Type="Self.PARTICIPER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VACATION">
+              <PropertyRef Name="IDATELIER" />
+              <PropertyRef Name="NUMERO" />
+            </Principal>
+            <Dependent Role="PARTICIPER">
+              <PropertyRef Name="IDATELIER" />
+              <PropertyRef Name="NUMERO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ETREPRESENT">
+          <End Role="BENEVOLE" Type="Self.BENEVOLE" Multiplicity="*" />
+          <End Role="DATEBENEVOLAT" Type="Self.DATEBENEVOLAT" Multiplicity="*" />
+        </Association>
+        <Association Name="INCLUREACCOMPAGNANT">
+          <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="*" />
+          <End Role="RESTAURATION" Type="Self.RESTAURATION" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="M2LEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ATELIERs" EntityType="Self.ATELIER" />
+          <EntitySet Name="BENEVOLEs" EntityType="Self.BENEVOLE" />
+          <EntitySet Name="CATEGORIECHAMBREs" EntityType="Self.CATEGORIECHAMBRE" />
+          <EntitySet Name="CONTENUHEBERGEMENTs" EntityType="Self.CONTENUHEBERGEMENT" />
+          <EntitySet Name="DATEBENEVOLATs" EntityType="Self.DATEBENEVOLAT" />
+          <EntitySet Name="DATENUITEs" EntityType="Self.DATENUITE" />
+          <EntitySet Name="HOTELs" EntityType="Self.HOTEL" />
+          <EntitySet Name="INSCRIREs" EntityType="Self.INSCRIRE" />
+          <EntitySet Name="INTERVENANTs" EntityType="Self.INTERVENANT" />
+          <EntitySet Name="LICENCIEs" EntityType="Self.LICENCIE" />
+          <EntitySet Name="PAIEMENTs" EntityType="Self.PAIEMENT" />
+          <EntitySet Name="PARTICIPANTs" EntityType="Self.PARTICIPANT" />
+          <EntitySet Name="PARTICIPERs" EntityType="Self.PARTICIPER" />
+          <EntitySet Name="PROPOSERs" EntityType="Self.PROPOSER" />
+          <EntitySet Name="QUALITEs" EntityType="Self.QUALITE" />
+          <EntitySet Name="RESTAURATIONs" EntityType="Self.RESTAURATION" />
+          <EntitySet Name="STATUTs" EntityType="Self.STATUT" />
+          <EntitySet Name="THEMEs" EntityType="Self.THEME" />
+          <EntitySet Name="VACATIONs" EntityType="Self.VACATION" />
+          <EntitySet Name="PARAMETRES" EntityType="Self.PARAMETRE" />
+          <AssociationSet Name="FK_INSCRIRE_ATELIER" Association="Self.FK_INSCRIRE_ATELIER">
+            <End Role="ATELIER" EntitySet="ATELIERs" />
+            <End Role="INSCRIRE" EntitySet="INSCRIREs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INTERVENANT_ATELIER" Association="Self.FK_INTERVENANT_ATELIER">
+            <End Role="ATELIER" EntitySet="ATELIERs" />
+            <End Role="INTERVENANT" EntitySet="INTERVENANTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THEME_ATELIER" Association="Self.FK_THEME_ATELIER">
+            <End Role="ATELIER" EntitySet="ATELIERs" />
+            <End Role="THEME" EntitySet="THEMEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VACATION_ATELIER" Association="Self.FK_VACATION_ATELIER">
+            <End Role="ATELIER" EntitySet="ATELIERs" />
+            <End Role="VACATION" EntitySet="VACATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BENEVOLE_PARTICIPANT" Association="Self.FK_BENEVOLE_PARTICIPANT">
+            <End Role="PARTICIPANT" EntitySet="PARTICIPANTs" />
+            <End Role="BENEVOLE" EntitySet="BENEVOLEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTENUHEBERGEMENT_CATEGORI" Association="Self.FK_CONTENUHEBERGEMENT_CATEGORI">
+            <End Role="CATEGORIECHAMBRE" EntitySet="CATEGORIECHAMBREs" />
+            <End Role="CONTENUHEBERGEMENT" EntitySet="CONTENUHEBERGEMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROPOSER_CATEGORIECHAMBRE" Association="Self.FK_PROPOSER_CATEGORIECHAMBRE">
+            <End Role="CATEGORIECHAMBRE" EntitySet="CATEGORIECHAMBREs" />
+            <End Role="PROPOSER" EntitySet="PROPOSERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTENUHEBERGEMENT_DATENUIT" Association="Self.FK_CONTENUHEBERGEMENT_DATENUIT">
+            <End Role="DATENUITE" EntitySet="DATENUITEs" />
+            <End Role="CONTENUHEBERGEMENT" EntitySet="CONTENUHEBERGEMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTENUHEBERGEMENT_HOTEL" Association="Self.FK_CONTENUHEBERGEMENT_HOTEL">
+            <End Role="HOTEL" EntitySet="HOTELs" />
+            <End Role="CONTENUHEBERGEMENT" EntitySet="CONTENUHEBERGEMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTENUHEBERGEMENT_PARTICIP" Association="Self.FK_CONTENUHEBERGEMENT_PARTICIP">
+            <End Role="PARTICIPANT" EntitySet="PARTICIPANTs" />
+            <End Role="CONTENUHEBERGEMENT" EntitySet="CONTENUHEBERGEMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROPOSER_HOTEL" Association="Self.FK_PROPOSER_HOTEL">
+            <End Role="HOTEL" EntitySet="HOTELs" />
+            <End Role="PROPOSER" EntitySet="PROPOSERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INSCRIRE_LICENCIE" Association="Self.FK_INSCRIRE_LICENCIE">
+            <End Role="LICENCIE" EntitySet="LICENCIEs" />
+            <End Role="INSCRIRE" EntitySet="INSCRIREs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PARTICIPER_INSCRIRE" Association="Self.FK_PARTICIPER_INSCRIRE">
+            <End Role="INSCRIRE" EntitySet="INSCRIREs" />
+            <End Role="PARTICIPER" EntitySet="PARTICIPERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INTERVENANT_PARTICIPANT" Association="Self.FK_INTERVENANT_PARTICIPANT">
+            <End Role="PARTICIPANT" EntitySet="PARTICIPANTs" />
+            <End Role="INTERVENANT" EntitySet="INTERVENANTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INTERVENANT_STATUT" Association="Self.FK_INTERVENANT_STATUT">
+            <End Role="STATUT" EntitySet="STATUTs" />
+            <End Role="INTERVENANT" EntitySet="INTERVENANTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICENCIE_PARTICIPANT" Association="Self.FK_LICENCIE_PARTICIPANT">
+            <End Role="PARTICIPANT" EntitySet="PARTICIPANTs" />
+            <End Role="LICENCIE" EntitySet="LICENCIEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICENCIE_QUALITE" Association="Self.FK_LICENCIE_QUALITE">
+            <End Role="QUALITE" EntitySet="QUALITEs" />
+            <End Role="LICENCIE" EntitySet="LICENCIEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAIEMENT_LICENCIE" Association="Self.FK_PAIEMENT_LICENCIE">
+            <End Role="LICENCIE" EntitySet="LICENCIEs" />
+            <End Role="PAIEMENT" EntitySet="PAIEMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PARTICIPER_VACATION" Association="Self.FK_PARTICIPER_VACATION">
+            <End Role="VACATION" EntitySet="VACATIONs" />
+            <End Role="PARTICIPER" EntitySet="PARTICIPERs" />
+          </AssociationSet>
+          <AssociationSet Name="ETREPRESENT" Association="Self.ETREPRESENT">
+            <End Role="BENEVOLE" EntitySet="BENEVOLEs" />
+            <End Role="DATEBENEVOLAT" EntitySet="DATEBENEVOLATs" />
+          </AssociationSet>
+          <AssociationSet Name="INCLUREACCOMPAGNANT" Association="Self.INCLUREACCOMPAGNANT">
+            <End Role="LICENCIE" EntitySet="LICENCIEs" />
+            <End Role="RESTAURATION" EntitySet="RESTAURATIONs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="M2LModelStoreContainer" CdmEntityContainer="M2LEntities">
+          <EntitySetMapping Name="ATELIERs">
+            <EntityTypeMapping TypeName="M2LModel.ATELIER">
+              <MappingFragment StoreEntitySet="ATELIER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LIBELLEATELIER" ColumnName="LIBELLEATELIER" />
+                <ScalarProperty Name="NBPLACESMAXI" ColumnName="NBPLACESMAXI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BENEVOLEs">
+            <EntityTypeMapping TypeName="M2LModel.BENEVOLE">
+              <MappingFragment StoreEntitySet="BENEVOLE">
+                <ScalarProperty Name="IDBENEVOLE" ColumnName="IDBENEVOLE" />
+                <ScalarProperty Name="NUMEROLICENCE" ColumnName="NUMEROLICENCE" />
+                <ScalarProperty Name="DATENAISSANCE" ColumnName="DATENAISSANCE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIECHAMBREs">
+            <EntityTypeMapping TypeName="M2LModel.CATEGORIECHAMBRE">
+              <MappingFragment StoreEntitySet="CATEGORIECHAMBRE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LIBELLECATEGORIE" ColumnName="LIBELLECATEGORIE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTENUHEBERGEMENTs">
+            <EntityTypeMapping TypeName="M2LModel.CONTENUHEBERGEMENT">
+              <MappingFragment StoreEntitySet="CONTENUHEBERGEMENT">
+                <ScalarProperty Name="IDPARTICIPANT" ColumnName="IDPARTICIPANT" />
+                <ScalarProperty Name="NUMORDRE" ColumnName="NUMORDRE" />
+                <ScalarProperty Name="CODEHOTEL" ColumnName="CODEHOTEL" />
+                <ScalarProperty Name="IDCATEGORIE" ColumnName="IDCATEGORIE" />
+                <ScalarProperty Name="IDDATEARRIVEENUITEE" ColumnName="IDDATEARRIVEENUITEE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATEBENEVOLATs">
+            <EntityTypeMapping TypeName="M2LModel.DATEBENEVOLAT">
+              <MappingFragment StoreEntitySet="DATEBENEVOLAT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DATEBENEVOLAT1" ColumnName="DATEBENEVOLAT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATENUITEs">
+            <EntityTypeMapping TypeName="M2LModel.DATENUITE">
+              <MappingFragment StoreEntitySet="DATENUITE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DATEARRIVEENUITEE" ColumnName="DATEARRIVEENUITEE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOTELs">
+            <EntityTypeMapping TypeName="M2LModel.HOTEL">
+              <MappingFragment StoreEntitySet="HOTEL">
+                <ScalarProperty Name="CODEHOTEL" ColumnName="CODEHOTEL" />
+                <ScalarProperty Name="NOMHOTEL" ColumnName="NOMHOTEL" />
+                <ScalarProperty Name="ADRESSEHOTEL1" ColumnName="ADRESSEHOTEL1" />
+                <ScalarProperty Name="ADRESSEHOTEL2" ColumnName="ADRESSEHOTEL2" />
+                <ScalarProperty Name="CPHOTEL" ColumnName="CPHOTEL" />
+                <ScalarProperty Name="VILLEHOTEL" ColumnName="VILLEHOTEL" />
+                <ScalarProperty Name="TELHOTEL" ColumnName="TELHOTEL" />
+                <ScalarProperty Name="MAILHOTEL" ColumnName="MAILHOTEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSCRIREs">
+            <EntityTypeMapping TypeName="M2LModel.INSCRIRE">
+              <MappingFragment StoreEntitySet="INSCRIRE">
+                <ScalarProperty Name="IDPARTICIPANT" ColumnName="IDPARTICIPANT" />
+                <ScalarProperty Name="IDATELIER" ColumnName="IDATELIER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INTERVENANTs">
+            <EntityTypeMapping TypeName="M2LModel.INTERVENANT">
+              <MappingFragment StoreEntitySet="INTERVENANT">
+                <ScalarProperty Name="IDINTERVENANT" ColumnName="IDINTERVENANT" />
+                <ScalarProperty Name="IDATELIER" ColumnName="IDATELIER" />
+                <ScalarProperty Name="IDSTATUT" ColumnName="IDSTATUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICENCIEs">
+            <EntityTypeMapping TypeName="M2LModel.LICENCIE">
+              <MappingFragment StoreEntitySet="LICENCIE">
+                <ScalarProperty Name="IDLICENCIE" ColumnName="IDLICENCIE" />
+                <ScalarProperty Name="IDQUALITE" ColumnName="IDQUALITE" />
+                <ScalarProperty Name="NUMEROLICENCE" ColumnName="NUMEROLICENCE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAIEMENTs">
+            <EntityTypeMapping TypeName="M2LModel.PAIEMENT">
+              <MappingFragment StoreEntitySet="PAIEMENT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDLICENCIE" ColumnName="IDLICENCIE" />
+                <ScalarProperty Name="MONTANTCHEQUE" ColumnName="MONTANTCHEQUE" />
+                <ScalarProperty Name="NUMEROCHEQUE" ColumnName="NUMEROCHEQUE" />
+                <ScalarProperty Name="TYPEPAIEMENT" ColumnName="TYPEPAIEMENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARTICIPANTs">
+            <EntityTypeMapping TypeName="M2LModel.PARTICIPANT">
+              <MappingFragment StoreEntitySet="PARTICIPANT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMPARTICIPANT" ColumnName="NOMPARTICIPANT" />
+                <ScalarProperty Name="PRENOMPARTICIPANT" ColumnName="PRENOMPARTICIPANT" />
+                <ScalarProperty Name="ADRESSEPARTICIPANT1" ColumnName="ADRESSEPARTICIPANT1" />
+                <ScalarProperty Name="ADRESSEPARTICIPANT2" ColumnName="ADRESSEPARTICIPANT2" />
+                <ScalarProperty Name="CPPARTICIPANT" ColumnName="CPPARTICIPANT" />
+                <ScalarProperty Name="VILLEPARTICIPANT" ColumnName="VILLEPARTICIPANT" />
+                <ScalarProperty Name="TELPARTICIPANT" ColumnName="TELPARTICIPANT" />
+                <ScalarProperty Name="MAILPARTICIPANT" ColumnName="MAILPARTICIPANT" />
+                <ScalarProperty Name="DATEINSCRIPTION" ColumnName="DATEINSCRIPTION" />
+                <ScalarProperty Name="DATEENREGISTREMENTARRIVEE" ColumnName="DATEENREGISTREMENTARRIVEE" />
+                <ScalarProperty Name="CLEWIFI" ColumnName="CLEWIFI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARTICIPERs">
+            <EntityTypeMapping TypeName="M2LModel.PARTICIPER">
+              <MappingFragment StoreEntitySet="PARTICIPER">
+                <ScalarProperty Name="IDLICENCIE" ColumnName="IDLICENCIE" />
+                <ScalarProperty Name="IDATELIER" ColumnName="IDATELIER" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROPOSERs">
+            <EntityTypeMapping TypeName="M2LModel.PROPOSER">
+              <MappingFragment StoreEntitySet="PROPOSER">
+                <ScalarProperty Name="CODEHOTEL" ColumnName="CODEHOTEL" />
+                <ScalarProperty Name="IDCATEGORIE" ColumnName="IDCATEGORIE" />
+                <ScalarProperty Name="TARIFNUITE" ColumnName="TARIFNUITE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUALITEs">
+            <EntityTypeMapping TypeName="M2LModel.QUALITE">
+              <MappingFragment StoreEntitySet="QUALITE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LIBELLEQUALITE" ColumnName="LIBELLEQUALITE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESTAURATIONs">
+            <EntityTypeMapping TypeName="M2LModel.RESTAURATION">
+              <MappingFragment StoreEntitySet="RESTAURATION">
+                <ScalarProperty Name="IDRESTAURATION" ColumnName="IDRESTAURATION" />
+                <ScalarProperty Name="DATERESTAURATION" ColumnName="DATERESTAURATION" />
+                <ScalarProperty Name="TYPEREPAS" ColumnName="TYPEREPAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATUTs">
+            <EntityTypeMapping TypeName="M2LModel.STATUT">
+              <MappingFragment StoreEntitySet="STATUT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LIBELLESTATUT" ColumnName="LIBELLESTATUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THEMEs">
+            <EntityTypeMapping TypeName="M2LModel.THEME">
+              <MappingFragment StoreEntitySet="THEME">
+                <ScalarProperty Name="IDATELIER" ColumnName="IDATELIER" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="LIBELLETHEME" ColumnName="LIBELLETHEME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VACATIONs">
+            <EntityTypeMapping TypeName="M2LModel.VACATION">
+              <MappingFragment StoreEntitySet="VACATION">
+                <ScalarProperty Name="IDATELIER" ColumnName="IDATELIER" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="HEUREDEBUT" ColumnName="HEUREDEBUT" />
+                <ScalarProperty Name="HEUREFIN" ColumnName="HEUREFIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARAMETRES">
+            <EntityTypeMapping TypeName="M2LModel.PARAMETRE">
+              <MappingFragment StoreEntitySet="PARAMETRES">
+                <ScalarProperty Name="NOMDDL" ColumnName="NOMDDL" />
+                <ScalarProperty Name="ADRUE1" ColumnName="ADRUE1" />
+                <ScalarProperty Name="ADRUE2" ColumnName="ADRUE2" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="TARIFINSCRIPTION" ColumnName="TARIFINSCRIPTION" />
+                <ScalarProperty Name="TARIFREPASACCOMPAGNANT" ColumnName="TARIFREPASACCOMPAGNANT" />
+                <ScalarProperty Name="DUREE" ColumnName="DUREE" />
+                <ScalarProperty Name="NBATELIERMAX" ColumnName="NBATELIERMAX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ETREPRESENT" TypeName="M2LModel.ETREPRESENT" StoreEntitySet="ETREPRESENT">
+            <EndProperty Name="BENEVOLE">
+              <ScalarProperty Name="IDBENEVOLE" ColumnName="IDBENEVOLE" />
+            </EndProperty>
+            <EndProperty Name="DATEBENEVOLAT">
+              <ScalarProperty Name="ID" ColumnName="IDDATEPRESENT" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="INCLUREACCOMPAGNANT" TypeName="M2LModel.INCLUREACCOMPAGNANT" StoreEntitySet="INCLUREACCOMPAGNANT">
+            <EndProperty Name="LICENCIE">
+              <ScalarProperty Name="IDLICENCIE" ColumnName="IDLICENCIE" />
+            </EndProperty>
+            <EndProperty Name="RESTAURATION">
+              <ScalarProperty Name="IDRESTAURATION" ColumnName="IDRESTAURATION" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

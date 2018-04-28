@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a303750c72c4fa281bcb02eae2ac16f" Name="Diagram1">
+        <EntityTypeShape EntityType="M2LModel.ATELIER" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.BENEVOLE" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.CATEGORIECHAMBRE" Width="1.5" PointX="3.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.CONTENUHEBERGEMENT" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.DATEBENEVOLAT" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.DATENUITE" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.HOTEL" Width="1.5" PointX="3.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.INSCRIRE" Width="1.5" PointX="8.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.INTERVENANT" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.LICENCIE" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.PAIEMENT" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.PARTICIPANT" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.PARTICIPER" Width="1.5" PointX="10.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.PROPOSER" Width="1.5" PointX="8" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.QUALITE" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.RESTAURATION" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.STATUT" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.THEME" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.VACATION" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="M2LModel.PARAMETRE" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="M2LModel.FK_INSCRIRE_ATELIER" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_INTERVENANT_ATELIER" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_THEME_ATELIER" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_VACATION_ATELIER" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_BENEVOLE_PARTICIPANT" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_CONTENUHEBERGEMENT_CATEGORI" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_PROPOSER_CATEGORIECHAMBRE" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_CONTENUHEBERGEMENT_DATENUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_CONTENUHEBERGEMENT_HOTEL" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_CONTENUHEBERGEMENT_PARTICIP" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_PROPOSER_HOTEL" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_INSCRIRE_LICENCIE" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_PARTICIPER_INSCRIRE" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_INTERVENANT_PARTICIPANT" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_INTERVENANT_STATUT" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_LICENCIE_PARTICIPANT" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_LICENCIE_QUALITE" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_PAIEMENT_LICENCIE" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.FK_PARTICIPER_VACATION" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.ETREPRESENT" ManuallyRouted="false" />
+        <AssociationConnector Association="M2LModel.INCLUREACCOMPAGNANT" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
