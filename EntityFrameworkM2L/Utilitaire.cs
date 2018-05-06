@@ -14,17 +14,17 @@ namespace EntityFrameworkM2L
 {
     internal abstract class Utilitaire
     {
-        public static void RemplirComboBox(Object SourceRemplissage, ComboBox UneCombo, String TypeTable = "")
+        public static void RemplirComboBox(DataTable SourceRemplissage, ComboBox UneCombo)
         {
             UneCombo.DataSource = SourceRemplissage;
-            UneCombo.DisplayMember = "libelle"+TypeTable;
+            UneCombo.DisplayMember = "libelle";
             UneCombo.ValueMember = "id";
         }
 
-        public static void RemplirListBox(Object SourceRemplissage, ListBox UneList,String TypeTable="")
+        public static void RemplirListBox(DataTable SourceRemplissage, ListBox UneList)
         {
             UneList.DataSource = SourceRemplissage;
-            UneList.DisplayMember = "libelle"+TypeTable;
+            UneList.DisplayMember = "libelle";
             UneList.ValueMember = "id";
         }
 
@@ -34,7 +34,7 @@ namespace EntityFrameworkM2L
             switch (pUneTable)
             {
                 case "restauration":
-                    UneTable = (DataTable)UneConnexion.FindRestauration();
+                    UneTable = UneConnexion.FindRestauration();
                     break;
                 default:
                     throw new Exception("Entité Innexistante");
@@ -44,9 +44,6 @@ namespace EntityFrameworkM2L
             Int16 i = 0;
             foreach (DataRow UneLigne in UneTable.Rows)
             {
-                //object UnControle = Activator.CreateInstance(object unobjet, unTypeControle);
-                //UnControle=Convert.ChangeType(UnControle, TypeC);
-
                 if (unTypeControle == "CheckBox")
                 {
                     MaterialCheckBox UnControle = new MaterialCheckBox();
@@ -71,7 +68,6 @@ namespace EntityFrameworkM2L
             UnControleAPlacer.Top = 5 +(10 * i);
             UnControleAPlacer.Visible = true;                  
             System.Type UnType = UneForme.GetType();
-            //((UnType)UneForme).
             UnContainer.Controls.Add(UnControleAPlacer);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -37,8 +38,8 @@ namespace EntityFrameworkM2L
             UneConnexion = new bdd();
             var lesAteliers = UneConnexion.FindAtelier();
             var lesQualites = UneConnexion.FindQualite();
-            Utilitaire.RemplirComboBox(lesQualites, this.CmbQualiteLicenciee,"qualite");
-            Utilitaire.RemplirListBox(lesAteliers, this.LsbAtelierLicencie, "atelier");
+            Utilitaire.RemplirComboBox(lesQualites, this.CmbQualiteLicenciee);
+            Utilitaire.RemplirListBox(lesAteliers, this.LsbAtelierLicencie);
             Utilitaire.CreerDesControles(this, UneConnexion, "restauration", "ChkRepasL_", PanRepasLicencie, "CheckBox");
         }
 
@@ -47,6 +48,7 @@ namespace EntityFrameworkM2L
             if (MessageBox.Show("Voulez-vous quitter l'application ?","Maison des ligues", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 Application.Exit();
+                UneConnexion.FermerConnexion();
             }
         }
 
@@ -68,6 +70,121 @@ namespace EntityFrameworkM2L
                 PanRepasLicencie.Visible = false;
                 TxtMontantCheque2.Enabled = false;
                 TxtNumeroCheque2.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Méthode qui permet d'afficher ou masquer le controle panel permettant la saisie des nuités d'un licencié.
+        /// S'il faut rendre visible le panel, on teste si les nuités possibles ont été chargés dans ce panel. Si non, on les charges 
+        /// On charge ici autant de contrôles ResaNuit qu'il y a de nuits possibles
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RdbNuiteLicencie_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Name == "RdbNuiteLicencieOui")
+            {
+                PanNuiteLicencie.Visible = true;
+                if (PanNuiteLicencie.Controls.Count == 0)
+                {
+                    Dictionary<Int16, String> LesNuites = UneConnexion.ObtenirDatesNuites();
+                    int i = 0;
+                    foreach (KeyValuePair<Int16, String> UneNuite in LesNuites)
+                    {
+                        ComposantNuite.ResaNuite unResaNuit = new ResaNuite(UneConnexion.FindHotel(), (UneConnexion.FindCategorie()), UneNuite.Value, UneNuite.Key);
+                        unResaNuit.Left = 5;
+                        unResaNuit.Top = 5 + (24 * i++);
+                        unResaNuit.Visible = true;
+                        PanNuiteLicencie.Controls.Add(unResaNuit);
+                    }
+                }
+            }
+            else
+            {
+                PanNuiteLicencie.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// Permet d'intercepter le click sur le bouton d'enregistrement d'un licencié.
+        /// Cetteméthode va appeler la méthode InscrireLicencié de la Bdd, après avoir mis en forme certains paramètres à envoyer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnEnregistrerLicencie_Click(object sender, EventArgs e)
+        {
+
+            //On recolte les atelier selectionnés
+            Collection<Int16> AteliersSelectionnes = new Collection<Int16>();
+            String TypePayement = "Tout";
+            Int16 Ncheque2 = 0;
+            Decimal Mcheque2 = 0;
+            try
+            {
+                for (int i = 0; i < LsbAtelierLicencie.SelectedIndices.Count; i++)
+                {
+                    AteliersSelectionnes.Add(Convert.ToInt16((LsbAtelierLicencie.SelectedIndices[i]) + 1));
+                }
+                Int64? NumeroLicence;
+                if (MskLicenceLicencie.MaskCompleted)
+                {
+                    NumeroLicence = System.Convert.ToInt64(MskLicenceLicencie.Text);
+                }
+                else
+                {
+                    throw new Exception("Licence non complété");
+                }
+                Collection<Int16> RepasSelectionnes = new Collection<Int16>();
+                Collection<Int16> NuitsSelectionnes = new Collection<Int16>();
+                Collection<String> HotelsSelectionnes = new Collection<string>();
+                Collection<String> CategoriesSelectionnees = new Collection<string>();
+
+                foreach (Control UnControle in PanNuiteLicencie.Controls)
+                {
+                    if (UnControle.GetType().Name == "ResaNuite" && ((ResaNuite)UnControle).GetNuitSelectionnee())
+                    {
+                        CategoriesSelectionnees.Add(((ResaNuite)UnControle).GetTypeChambreSelectionnee());
+                        HotelsSelectionnes.Add(((ResaNuite)UnControle).GetHotelSelectionne());
+                        NuitsSelectionnes.Add(((ResaNuite)UnControle).IdNuite);
+                    }
+                }
+                if (NuitsSelectionnes.Count == 0 && RdbNuiteLicencieOui.Checked)
+                {
+                    throw new Exception("Si vous avez sélectionné que l'accompagnant avait des nuitées,\n il faut qu'au moins une nuit soit sélectionnée");
+                }
+
+                foreach (Control UnControle in PanRepasLicencie.Controls)
+                {
+                    if (UnControle.GetType().Name == "MaterialCheckBox" && ((CheckBox)UnControle).Checked)
+                    {
+                        //RepasSelectionnes.Add(System.Convert.ToInt16((UnControle.Name.Split('_'))[1]));
+                        RepasSelectionnes.Add(1);
+                    }
+                }
+               if (RepasSelectionnes.Count == 0 && RdbAccompagnantLicencieOui.Checked)
+                {
+                    throw new Exception("Si vous avez sélectionné que l'accompagnant avait des repas\n il faut qu'au moins un repas soit sélectionnée");
+                }
+                if (TxtMontantCheque2.Text != "" && TxtNumeroCheque2.Text != "" && RepasSelectionnes.Count() != 0)
+                {
+                    Ncheque2 = Convert.ToInt16(TxtNumeroCheque2.Text);
+                    Mcheque2 = Convert.ToDecimal(TxtMontantCheque2.Text);
+                    TypePayement = "Insc";
+                }
+                if (RepasSelectionnes.Count != 0 || (NuitsSelectionnes.Count != 0))
+                {
+                    UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes, Ncheque2, Mcheque2);
+                    MessageBox.Show("Inscription licencié terminée");
+                }
+                else
+                {
+                    UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes);
+                    MessageBox.Show("Inscription licencié terminée");
+                }
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
             }
         }
     }

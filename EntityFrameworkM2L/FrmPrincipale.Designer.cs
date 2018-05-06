@@ -46,31 +46,31 @@
             this.TxtNom = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.GrpLicencie = new System.Windows.Forms.GroupBox();
+            this.BtnEnregistrerLicencie = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.TxtMontantCheque2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.TxtNumeroCheque2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.TxtNumeroCheque = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.TxtMontantCheque = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.CmbQualiteLicenciee = new System.Windows.Forms.ComboBox();
             this.Qualité = new System.Windows.Forms.Label();
-            this.LsbAtelierLicencie = new System.Windows.Forms.ListBox();
             this.GrpRepasAccompagnant = new System.Windows.Forms.GroupBox();
+            this.RdbAccompagnantLicencieNon = new MaterialSkin.Controls.MaterialRadioButton();
+            this.RdbAccompagnantLicencieOui = new MaterialSkin.Controls.MaterialRadioButton();
             this.PanRepasLicencie = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.MskLicenceLicencie = new System.Windows.Forms.MaskedTextBox();
             this.GrpNuiteLicencie = new System.Windows.Forms.GroupBox();
+            this.RdbNuiteLicencieNon = new MaterialSkin.Controls.MaterialRadioButton();
+            this.RdbNuiteLicencieOui = new MaterialSkin.Controls.MaterialRadioButton();
             this.PanNuiteLicencie = new System.Windows.Forms.Panel();
-            this.TxtMontantCheque = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.TxtNumeroCheque = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.TxtNumeroCheque2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.TxtMontantCheque2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.PicAffiche = new System.Windows.Forms.PictureBox();
             this.BtnQuitter = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.BtnEnregistrerLicencie = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.RdbNuiteLicencieOui = new MaterialSkin.Controls.MaterialRadioButton();
-            this.RdbNuiteLicencieNon = new MaterialSkin.Controls.MaterialRadioButton();
-            this.RdbAccompagnantLicencieOui = new MaterialSkin.Controls.MaterialRadioButton();
-            this.RdbAccompagnantLicencieNon = new MaterialSkin.Controls.MaterialRadioButton();
+            this.LsbAtelierLicencie = new System.Windows.Forms.ListBox();
             this.GrpIdentite.SuspendLayout();
             this.GrpLicencie.SuspendLayout();
             this.GrpRepasAccompagnant.SuspendLayout();
@@ -115,6 +115,7 @@
             this.TxtMail.SelectionStart = 0;
             this.TxtMail.Size = new System.Drawing.Size(154, 23);
             this.TxtMail.TabIndex = 22;
+            this.TxtMail.Text = "leo.espeu@gmail.com";
             this.TxtMail.UseSystemPasswordChar = false;
             // 
             // TxtVille
@@ -130,6 +131,7 @@
             this.TxtVille.SelectionStart = 0;
             this.TxtVille.Size = new System.Drawing.Size(154, 23);
             this.TxtVille.TabIndex = 20;
+            this.TxtVille.Text = "Toulon";
             this.TxtVille.UseSystemPasswordChar = false;
             // 
             // materialLabel7
@@ -178,6 +180,7 @@
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(100, 20);
             this.txtTel.TabIndex = 14;
+            this.txtTel.Text = "6666666666";
             // 
             // TxtCp
             // 
@@ -186,6 +189,7 @@
             this.TxtCp.Name = "TxtCp";
             this.TxtCp.Size = new System.Drawing.Size(90, 20);
             this.TxtCp.TabIndex = 13;
+            this.TxtCp.Text = "83000";
             // 
             // materialLabel4
             // 
@@ -228,6 +232,7 @@
             this.TxtAdr1.SelectionStart = 0;
             this.TxtAdr1.Size = new System.Drawing.Size(326, 23);
             this.TxtAdr1.TabIndex = 5;
+            this.TxtAdr1.Text = "34 rue du plsql";
             this.TxtAdr1.UseSystemPasswordChar = false;
             // 
             // materialLabel3
@@ -256,6 +261,7 @@
             this.TxtPrenom.SelectionStart = 0;
             this.TxtPrenom.Size = new System.Drawing.Size(128, 23);
             this.TxtPrenom.TabIndex = 3;
+            this.TxtPrenom.Text = "léo";
             this.TxtPrenom.UseSystemPasswordChar = false;
             // 
             // materialLabel2
@@ -284,6 +290,7 @@
             this.TxtNom.SelectionStart = 0;
             this.TxtNom.Size = new System.Drawing.Size(128, 23);
             this.TxtNom.TabIndex = 1;
+            this.TxtNom.Text = "espeu";
             this.TxtNom.UseSystemPasswordChar = false;
             // 
             // materialLabel1
@@ -301,6 +308,7 @@
             // 
             // GrpLicencie
             // 
+            this.GrpLicencie.Controls.Add(this.LsbAtelierLicencie);
             this.GrpLicencie.Controls.Add(this.BtnEnregistrerLicencie);
             this.GrpLicencie.Controls.Add(this.TxtMontantCheque2);
             this.GrpLicencie.Controls.Add(this.TxtNumeroCheque2);
@@ -311,7 +319,6 @@
             this.GrpLicencie.Controls.Add(this.label13);
             this.GrpLicencie.Controls.Add(this.CmbQualiteLicenciee);
             this.GrpLicencie.Controls.Add(this.Qualité);
-            this.GrpLicencie.Controls.Add(this.LsbAtelierLicencie);
             this.GrpLicencie.Controls.Add(this.GrpRepasAccompagnant);
             this.GrpLicencie.Controls.Add(this.label12);
             this.GrpLicencie.Controls.Add(this.label11);
@@ -320,10 +327,87 @@
             this.GrpLicencie.Controls.Add(this.GrpNuiteLicencie);
             this.GrpLicencie.Location = new System.Drawing.Point(24, 322);
             this.GrpLicencie.Name = "GrpLicencie";
-            this.GrpLicencie.Size = new System.Drawing.Size(788, 378);
+            this.GrpLicencie.Size = new System.Drawing.Size(788, 391);
             this.GrpLicencie.TabIndex = 27;
             this.GrpLicencie.TabStop = false;
             this.GrpLicencie.Text = "Complément Inscription Licencie";
+            // 
+            // BtnEnregistrerLicencie
+            // 
+            this.BtnEnregistrerLicencie.Depth = 0;
+            this.BtnEnregistrerLicencie.Location = new System.Drawing.Point(570, 284);
+            this.BtnEnregistrerLicencie.MouseState = MaterialSkin.MouseState.HOVER;
+            this.BtnEnregistrerLicencie.Name = "BtnEnregistrerLicencie";
+            this.BtnEnregistrerLicencie.Primary = true;
+            this.BtnEnregistrerLicencie.Size = new System.Drawing.Size(138, 40);
+            this.BtnEnregistrerLicencie.TabIndex = 54;
+            this.BtnEnregistrerLicencie.Text = "Enregistrer";
+            this.BtnEnregistrerLicencie.UseVisualStyleBackColor = true;
+            this.BtnEnregistrerLicencie.Click += new System.EventHandler(this.BtnEnregistrerLicencie_Click);
+            // 
+            // TxtMontantCheque2
+            // 
+            this.TxtMontantCheque2.Depth = 0;
+            this.TxtMontantCheque2.Hint = "";
+            this.TxtMontantCheque2.Location = new System.Drawing.Point(570, 239);
+            this.TxtMontantCheque2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.TxtMontantCheque2.Name = "TxtMontantCheque2";
+            this.TxtMontantCheque2.PasswordChar = '\0';
+            this.TxtMontantCheque2.SelectedText = "";
+            this.TxtMontantCheque2.SelectionLength = 0;
+            this.TxtMontantCheque2.SelectionStart = 0;
+            this.TxtMontantCheque2.Size = new System.Drawing.Size(115, 23);
+            this.TxtMontantCheque2.TabIndex = 53;
+            this.TxtMontantCheque2.Text = "111";
+            this.TxtMontantCheque2.UseSystemPasswordChar = false;
+            // 
+            // TxtNumeroCheque2
+            // 
+            this.TxtNumeroCheque2.Depth = 0;
+            this.TxtNumeroCheque2.Hint = "";
+            this.TxtNumeroCheque2.Location = new System.Drawing.Point(570, 172);
+            this.TxtNumeroCheque2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.TxtNumeroCheque2.Name = "TxtNumeroCheque2";
+            this.TxtNumeroCheque2.PasswordChar = '\0';
+            this.TxtNumeroCheque2.SelectedText = "";
+            this.TxtNumeroCheque2.SelectionLength = 0;
+            this.TxtNumeroCheque2.SelectionStart = 0;
+            this.TxtNumeroCheque2.Size = new System.Drawing.Size(115, 23);
+            this.TxtNumeroCheque2.TabIndex = 52;
+            this.TxtNumeroCheque2.Text = "111";
+            this.TxtNumeroCheque2.UseSystemPasswordChar = false;
+            // 
+            // TxtNumeroCheque
+            // 
+            this.TxtNumeroCheque.Depth = 0;
+            this.TxtNumeroCheque.Hint = "";
+            this.TxtNumeroCheque.Location = new System.Drawing.Point(309, 29);
+            this.TxtNumeroCheque.MouseState = MaterialSkin.MouseState.HOVER;
+            this.TxtNumeroCheque.Name = "TxtNumeroCheque";
+            this.TxtNumeroCheque.PasswordChar = '\0';
+            this.TxtNumeroCheque.SelectedText = "";
+            this.TxtNumeroCheque.SelectionLength = 0;
+            this.TxtNumeroCheque.SelectionStart = 0;
+            this.TxtNumeroCheque.Size = new System.Drawing.Size(100, 23);
+            this.TxtNumeroCheque.TabIndex = 51;
+            this.TxtNumeroCheque.Text = "111";
+            this.TxtNumeroCheque.UseSystemPasswordChar = false;
+            // 
+            // TxtMontantCheque
+            // 
+            this.TxtMontantCheque.Depth = 0;
+            this.TxtMontantCheque.Hint = "";
+            this.TxtMontantCheque.Location = new System.Drawing.Point(187, 29);
+            this.TxtMontantCheque.MouseState = MaterialSkin.MouseState.HOVER;
+            this.TxtMontantCheque.Name = "TxtMontantCheque";
+            this.TxtMontantCheque.PasswordChar = '\0';
+            this.TxtMontantCheque.SelectedText = "";
+            this.TxtMontantCheque.SelectionLength = 0;
+            this.TxtMontantCheque.SelectionStart = 0;
+            this.TxtMontantCheque.Size = new System.Drawing.Size(113, 23);
+            this.TxtMontantCheque.TabIndex = 50;
+            this.TxtMontantCheque.Text = "120";
+            this.TxtMontantCheque.UseSystemPasswordChar = false;
             // 
             // label15
             // 
@@ -369,15 +453,6 @@
             this.Qualité.TabIndex = 41;
             this.Qualité.Text = "Qualité :";
             // 
-            // LsbAtelierLicencie
-            // 
-            this.LsbAtelierLicencie.FormattingEnabled = true;
-            this.LsbAtelierLicencie.Location = new System.Drawing.Point(556, 31);
-            this.LsbAtelierLicencie.Name = "LsbAtelierLicencie";
-            this.LsbAtelierLicencie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.LsbAtelierLicencie.Size = new System.Drawing.Size(140, 95);
-            this.LsbAtelierLicencie.TabIndex = 39;
-            // 
             // GrpRepasAccompagnant
             // 
             this.GrpRepasAccompagnant.Controls.Add(this.RdbAccompagnantLicencieNon);
@@ -385,16 +460,52 @@
             this.GrpRepasAccompagnant.Controls.Add(this.PanRepasLicencie);
             this.GrpRepasAccompagnant.Location = new System.Drawing.Point(9, 60);
             this.GrpRepasAccompagnant.Name = "GrpRepasAccompagnant";
-            this.GrpRepasAccompagnant.Size = new System.Drawing.Size(507, 89);
+            this.GrpRepasAccompagnant.Size = new System.Drawing.Size(507, 114);
             this.GrpRepasAccompagnant.TabIndex = 37;
             this.GrpRepasAccompagnant.TabStop = false;
             this.GrpRepasAccompagnant.Text = "Repas accompagnant";
+            // 
+            // RdbAccompagnantLicencieNon
+            // 
+            this.RdbAccompagnantLicencieNon.AutoSize = true;
+            this.RdbAccompagnantLicencieNon.Checked = true;
+            this.RdbAccompagnantLicencieNon.Depth = 0;
+            this.RdbAccompagnantLicencieNon.Font = new System.Drawing.Font("Roboto", 10F);
+            this.RdbAccompagnantLicencieNon.Location = new System.Drawing.Point(12, 52);
+            this.RdbAccompagnantLicencieNon.Margin = new System.Windows.Forms.Padding(0);
+            this.RdbAccompagnantLicencieNon.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.RdbAccompagnantLicencieNon.MouseState = MaterialSkin.MouseState.HOVER;
+            this.RdbAccompagnantLicencieNon.Name = "RdbAccompagnantLicencieNon";
+            this.RdbAccompagnantLicencieNon.Ripple = true;
+            this.RdbAccompagnantLicencieNon.Size = new System.Drawing.Size(54, 30);
+            this.RdbAccompagnantLicencieNon.TabIndex = 26;
+            this.RdbAccompagnantLicencieNon.TabStop = true;
+            this.RdbAccompagnantLicencieNon.Text = "Non";
+            this.RdbAccompagnantLicencieNon.UseVisualStyleBackColor = true;
+            this.RdbAccompagnantLicencieNon.CheckedChanged += new System.EventHandler(this.RdbRepasLicencie_CheckedChanged);
+            // 
+            // RdbAccompagnantLicencieOui
+            // 
+            this.RdbAccompagnantLicencieOui.AutoSize = true;
+            this.RdbAccompagnantLicencieOui.Depth = 0;
+            this.RdbAccompagnantLicencieOui.Font = new System.Drawing.Font("Roboto", 10F);
+            this.RdbAccompagnantLicencieOui.Location = new System.Drawing.Point(12, 16);
+            this.RdbAccompagnantLicencieOui.Margin = new System.Windows.Forms.Padding(0);
+            this.RdbAccompagnantLicencieOui.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.RdbAccompagnantLicencieOui.MouseState = MaterialSkin.MouseState.HOVER;
+            this.RdbAccompagnantLicencieOui.Name = "RdbAccompagnantLicencieOui";
+            this.RdbAccompagnantLicencieOui.Ripple = true;
+            this.RdbAccompagnantLicencieOui.Size = new System.Drawing.Size(50, 30);
+            this.RdbAccompagnantLicencieOui.TabIndex = 25;
+            this.RdbAccompagnantLicencieOui.Text = "Oui";
+            this.RdbAccompagnantLicencieOui.UseVisualStyleBackColor = true;
+            this.RdbAccompagnantLicencieOui.CheckedChanged += new System.EventHandler(this.RdbRepasLicencie_CheckedChanged);
             // 
             // PanRepasLicencie
             // 
             this.PanRepasLicencie.Location = new System.Drawing.Point(89, 11);
             this.PanRepasLicencie.Name = "PanRepasLicencie";
-            this.PanRepasLicencie.Size = new System.Drawing.Size(411, 72);
+            this.PanRepasLicencie.Size = new System.Drawing.Size(411, 97);
             this.PanRepasLicencie.TabIndex = 0;
             this.PanRepasLicencie.Visible = false;
             // 
@@ -432,18 +543,55 @@
             this.MskLicenceLicencie.Name = "MskLicenceLicencie";
             this.MskLicenceLicencie.Size = new System.Drawing.Size(147, 20);
             this.MskLicenceLicencie.TabIndex = 31;
+            this.MskLicenceLicencie.Text = "111111111111";
             // 
             // GrpNuiteLicencie
             // 
             this.GrpNuiteLicencie.Controls.Add(this.RdbNuiteLicencieNon);
             this.GrpNuiteLicencie.Controls.Add(this.RdbNuiteLicencieOui);
             this.GrpNuiteLicencie.Controls.Add(this.PanNuiteLicencie);
-            this.GrpNuiteLicencie.Location = new System.Drawing.Point(9, 155);
+            this.GrpNuiteLicencie.Location = new System.Drawing.Point(9, 180);
             this.GrpNuiteLicencie.Name = "GrpNuiteLicencie";
             this.GrpNuiteLicencie.Size = new System.Drawing.Size(507, 199);
             this.GrpNuiteLicencie.TabIndex = 30;
             this.GrpNuiteLicencie.TabStop = false;
             this.GrpNuiteLicencie.Text = "Nuités";
+            // 
+            // RdbNuiteLicencieNon
+            // 
+            this.RdbNuiteLicencieNon.AutoSize = true;
+            this.RdbNuiteLicencieNon.Checked = true;
+            this.RdbNuiteLicencieNon.Depth = 0;
+            this.RdbNuiteLicencieNon.Font = new System.Drawing.Font("Roboto", 10F);
+            this.RdbNuiteLicencieNon.Location = new System.Drawing.Point(89, 16);
+            this.RdbNuiteLicencieNon.Margin = new System.Windows.Forms.Padding(0);
+            this.RdbNuiteLicencieNon.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.RdbNuiteLicencieNon.MouseState = MaterialSkin.MouseState.HOVER;
+            this.RdbNuiteLicencieNon.Name = "RdbNuiteLicencieNon";
+            this.RdbNuiteLicencieNon.Ripple = true;
+            this.RdbNuiteLicencieNon.Size = new System.Drawing.Size(54, 30);
+            this.RdbNuiteLicencieNon.TabIndex = 26;
+            this.RdbNuiteLicencieNon.TabStop = true;
+            this.RdbNuiteLicencieNon.Text = "Non";
+            this.RdbNuiteLicencieNon.UseVisualStyleBackColor = true;
+            this.RdbNuiteLicencieNon.CheckedChanged += new System.EventHandler(this.RdbNuiteLicencie_CheckedChanged);
+            // 
+            // RdbNuiteLicencieOui
+            // 
+            this.RdbNuiteLicencieOui.AutoSize = true;
+            this.RdbNuiteLicencieOui.Depth = 0;
+            this.RdbNuiteLicencieOui.Font = new System.Drawing.Font("Roboto", 10F);
+            this.RdbNuiteLicencieOui.Location = new System.Drawing.Point(7, 17);
+            this.RdbNuiteLicencieOui.Margin = new System.Windows.Forms.Padding(0);
+            this.RdbNuiteLicencieOui.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.RdbNuiteLicencieOui.MouseState = MaterialSkin.MouseState.HOVER;
+            this.RdbNuiteLicencieOui.Name = "RdbNuiteLicencieOui";
+            this.RdbNuiteLicencieOui.Ripple = true;
+            this.RdbNuiteLicencieOui.Size = new System.Drawing.Size(50, 30);
+            this.RdbNuiteLicencieOui.TabIndex = 25;
+            this.RdbNuiteLicencieOui.Text = "Oui";
+            this.RdbNuiteLicencieOui.UseVisualStyleBackColor = true;
+            this.RdbNuiteLicencieOui.CheckedChanged += new System.EventHandler(this.RdbNuiteLicencie_CheckedChanged);
             // 
             // PanNuiteLicencie
             // 
@@ -452,66 +600,6 @@
             this.PanNuiteLicencie.Size = new System.Drawing.Size(494, 128);
             this.PanNuiteLicencie.TabIndex = 24;
             this.PanNuiteLicencie.Visible = false;
-            // 
-            // TxtMontantCheque
-            // 
-            this.TxtMontantCheque.Depth = 0;
-            this.TxtMontantCheque.Hint = "";
-            this.TxtMontantCheque.Location = new System.Drawing.Point(187, 29);
-            this.TxtMontantCheque.MouseState = MaterialSkin.MouseState.HOVER;
-            this.TxtMontantCheque.Name = "TxtMontantCheque";
-            this.TxtMontantCheque.PasswordChar = '\0';
-            this.TxtMontantCheque.SelectedText = "";
-            this.TxtMontantCheque.SelectionLength = 0;
-            this.TxtMontantCheque.SelectionStart = 0;
-            this.TxtMontantCheque.Size = new System.Drawing.Size(113, 23);
-            this.TxtMontantCheque.TabIndex = 50;
-            this.TxtMontantCheque.UseSystemPasswordChar = false;
-            // 
-            // TxtNumeroCheque
-            // 
-            this.TxtNumeroCheque.Depth = 0;
-            this.TxtNumeroCheque.Hint = "";
-            this.TxtNumeroCheque.Location = new System.Drawing.Point(309, 29);
-            this.TxtNumeroCheque.MouseState = MaterialSkin.MouseState.HOVER;
-            this.TxtNumeroCheque.Name = "TxtNumeroCheque";
-            this.TxtNumeroCheque.PasswordChar = '\0';
-            this.TxtNumeroCheque.SelectedText = "";
-            this.TxtNumeroCheque.SelectionLength = 0;
-            this.TxtNumeroCheque.SelectionStart = 0;
-            this.TxtNumeroCheque.Size = new System.Drawing.Size(100, 23);
-            this.TxtNumeroCheque.TabIndex = 51;
-            this.TxtNumeroCheque.UseSystemPasswordChar = false;
-            // 
-            // TxtNumeroCheque2
-            // 
-            this.TxtNumeroCheque2.Depth = 0;
-            this.TxtNumeroCheque2.Hint = "";
-            this.TxtNumeroCheque2.Location = new System.Drawing.Point(570, 172);
-            this.TxtNumeroCheque2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.TxtNumeroCheque2.Name = "TxtNumeroCheque2";
-            this.TxtNumeroCheque2.PasswordChar = '\0';
-            this.TxtNumeroCheque2.SelectedText = "";
-            this.TxtNumeroCheque2.SelectionLength = 0;
-            this.TxtNumeroCheque2.SelectionStart = 0;
-            this.TxtNumeroCheque2.Size = new System.Drawing.Size(115, 23);
-            this.TxtNumeroCheque2.TabIndex = 52;
-            this.TxtNumeroCheque2.UseSystemPasswordChar = false;
-            // 
-            // TxtMontantCheque2
-            // 
-            this.TxtMontantCheque2.Depth = 0;
-            this.TxtMontantCheque2.Hint = "";
-            this.TxtMontantCheque2.Location = new System.Drawing.Point(570, 239);
-            this.TxtMontantCheque2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.TxtMontantCheque2.Name = "TxtMontantCheque2";
-            this.TxtMontantCheque2.PasswordChar = '\0';
-            this.TxtMontantCheque2.SelectedText = "";
-            this.TxtMontantCheque2.SelectionLength = 0;
-            this.TxtMontantCheque2.SelectionStart = 0;
-            this.TxtMontantCheque2.Size = new System.Drawing.Size(115, 23);
-            this.TxtMontantCheque2.TabIndex = 53;
-            this.TxtMontantCheque2.UseSystemPasswordChar = false;
             // 
             // PicAffiche
             // 
@@ -536,93 +624,20 @@
             this.BtnQuitter.UseVisualStyleBackColor = true;
             this.BtnQuitter.Click += new System.EventHandler(this.BtnQuitter_Click);
             // 
-            // BtnEnregistrerLicencie
+            // LsbAtelierLicencie
             // 
-            this.BtnEnregistrerLicencie.Depth = 0;
-            this.BtnEnregistrerLicencie.Location = new System.Drawing.Point(570, 284);
-            this.BtnEnregistrerLicencie.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BtnEnregistrerLicencie.Name = "BtnEnregistrerLicencie";
-            this.BtnEnregistrerLicencie.Primary = true;
-            this.BtnEnregistrerLicencie.Size = new System.Drawing.Size(138, 40);
-            this.BtnEnregistrerLicencie.TabIndex = 54;
-            this.BtnEnregistrerLicencie.Text = "Enregistrer";
-            this.BtnEnregistrerLicencie.UseVisualStyleBackColor = true;
-            // 
-            // RdbNuiteLicencieOui
-            // 
-            this.RdbNuiteLicencieOui.AutoSize = true;
-            this.RdbNuiteLicencieOui.Depth = 0;
-            this.RdbNuiteLicencieOui.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.RdbNuiteLicencieOui.Location = new System.Drawing.Point(7, 17);
-            this.RdbNuiteLicencieOui.Margin = new System.Windows.Forms.Padding(0);
-            this.RdbNuiteLicencieOui.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.RdbNuiteLicencieOui.MouseState = MaterialSkin.MouseState.HOVER;
-            this.RdbNuiteLicencieOui.Name = "RdbNuiteLicencieOui";
-            this.RdbNuiteLicencieOui.Ripple = true;
-            this.RdbNuiteLicencieOui.Size = new System.Drawing.Size(50, 30);
-            this.RdbNuiteLicencieOui.TabIndex = 25;
-            this.RdbNuiteLicencieOui.Text = "Oui";
-            this.RdbNuiteLicencieOui.UseVisualStyleBackColor = true;
-            // 
-            // RdbNuiteLicencieNon
-            // 
-            this.RdbNuiteLicencieNon.AutoSize = true;
-            this.RdbNuiteLicencieNon.Checked = true;
-            this.RdbNuiteLicencieNon.Depth = 0;
-            this.RdbNuiteLicencieNon.Font = new System.Drawing.Font("Roboto", 10F);
-            this.RdbNuiteLicencieNon.Location = new System.Drawing.Point(89, 16);
-            this.RdbNuiteLicencieNon.Margin = new System.Windows.Forms.Padding(0);
-            this.RdbNuiteLicencieNon.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.RdbNuiteLicencieNon.MouseState = MaterialSkin.MouseState.HOVER;
-            this.RdbNuiteLicencieNon.Name = "RdbNuiteLicencieNon";
-            this.RdbNuiteLicencieNon.Ripple = true;
-            this.RdbNuiteLicencieNon.Size = new System.Drawing.Size(54, 30);
-            this.RdbNuiteLicencieNon.TabIndex = 26;
-            this.RdbNuiteLicencieNon.TabStop = true;
-            this.RdbNuiteLicencieNon.Text = "Non";
-            this.RdbNuiteLicencieNon.UseVisualStyleBackColor = true;
-            // 
-            // RdbAccompagnantLicencieOui
-            // 
-            this.RdbAccompagnantLicencieOui.AutoSize = true;
-            this.RdbAccompagnantLicencieOui.Depth = 0;
-            this.RdbAccompagnantLicencieOui.Font = new System.Drawing.Font("Roboto", 10F);
-            this.RdbAccompagnantLicencieOui.Location = new System.Drawing.Point(12, 16);
-            this.RdbAccompagnantLicencieOui.Margin = new System.Windows.Forms.Padding(0);
-            this.RdbAccompagnantLicencieOui.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.RdbAccompagnantLicencieOui.MouseState = MaterialSkin.MouseState.HOVER;
-            this.RdbAccompagnantLicencieOui.Name = "RdbAccompagnantLicencieOui";
-            this.RdbAccompagnantLicencieOui.Ripple = true;
-            this.RdbAccompagnantLicencieOui.Size = new System.Drawing.Size(50, 30);
-            this.RdbAccompagnantLicencieOui.TabIndex = 25;
-            this.RdbAccompagnantLicencieOui.Text = "Oui";
-            this.RdbAccompagnantLicencieOui.UseVisualStyleBackColor = true;
-            this.RdbAccompagnantLicencieOui.CheckedChanged += new System.EventHandler(this.RdbRepasLicencie_CheckedChanged);
-            // 
-            // RdbAccompagnantLicencieNon
-            // 
-            this.RdbAccompagnantLicencieNon.AutoSize = true;
-            this.RdbAccompagnantLicencieNon.Checked = true;
-            this.RdbAccompagnantLicencieNon.Depth = 0;
-            this.RdbAccompagnantLicencieNon.Font = new System.Drawing.Font("Roboto", 10F);
-            this.RdbAccompagnantLicencieNon.Location = new System.Drawing.Point(12, 52);
-            this.RdbAccompagnantLicencieNon.Margin = new System.Windows.Forms.Padding(0);
-            this.RdbAccompagnantLicencieNon.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.RdbAccompagnantLicencieNon.MouseState = MaterialSkin.MouseState.HOVER;
-            this.RdbAccompagnantLicencieNon.Name = "RdbAccompagnantLicencieNon";
-            this.RdbAccompagnantLicencieNon.Ripple = true;
-            this.RdbAccompagnantLicencieNon.Size = new System.Drawing.Size(54, 30);
-            this.RdbAccompagnantLicencieNon.TabIndex = 26;
-            this.RdbAccompagnantLicencieNon.TabStop = true;
-            this.RdbAccompagnantLicencieNon.Text = "Non";
-            this.RdbAccompagnantLicencieNon.UseVisualStyleBackColor = true;
-            this.RdbAccompagnantLicencieNon.CheckedChanged += new System.EventHandler(this.RdbRepasLicencie_CheckedChanged);
+            this.LsbAtelierLicencie.FormattingEnabled = true;
+            this.LsbAtelierLicencie.Location = new System.Drawing.Point(556, 31);
+            this.LsbAtelierLicencie.Name = "LsbAtelierLicencie";
+            this.LsbAtelierLicencie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.LsbAtelierLicencie.Size = new System.Drawing.Size(140, 95);
+            this.LsbAtelierLicencie.TabIndex = 55;
             // 
             // FrmPrincipale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 712);
+            this.ClientSize = new System.Drawing.Size(964, 718);
             this.Controls.Add(this.BtnQuitter);
             this.Controls.Add(this.PicAffiche);
             this.Controls.Add(this.GrpLicencie);
@@ -667,7 +682,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox CmbQualiteLicenciee;
         private System.Windows.Forms.Label Qualité;
-        private System.Windows.Forms.ListBox LsbAtelierLicencie;
         private System.Windows.Forms.GroupBox GrpRepasAccompagnant;
         private System.Windows.Forms.Panel PanRepasLicencie;
         private System.Windows.Forms.Label label12;
@@ -687,6 +701,7 @@
         private MaterialSkin.Controls.MaterialRadioButton RdbAccompagnantLicencieOui;
         private MaterialSkin.Controls.MaterialRadioButton RdbNuiteLicencieNon;
         private MaterialSkin.Controls.MaterialRadioButton RdbNuiteLicencieOui;
+        private System.Windows.Forms.ListBox LsbAtelierLicencie;
     }
 }
 
