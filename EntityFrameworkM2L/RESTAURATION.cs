@@ -20,7 +20,7 @@ namespace EntityFrameworkM2L
             this.LICENCIEs = new HashSet<LICENCIE>();
         }
     
-        public bool IDRESTAURATION { get; set; }
+        public decimal IDRESTAURATION { get; set; }
         public System.DateTime DATERESTAURATION { get; set; }
         public string TYPEREPAS { get; set; }
     

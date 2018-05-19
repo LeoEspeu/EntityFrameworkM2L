@@ -13,10 +13,10 @@ namespace EntityFrameworkM2L
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class M2LEntities : DbContext
+    public partial class M2LEntitie : DbContext
     {
-        public M2LEntities()
-            : base("name=M2LEntities")
+        public M2LEntitie()
+            : base("name=M2LEntitie")
         {
         }
     

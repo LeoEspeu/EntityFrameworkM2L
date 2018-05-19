@@ -34,7 +34,7 @@
             <PropertyRef Name="NUMORDRE" />
           </Key>
           <Property Name="IDPARTICIPANT" Type="number" Precision="4" Scale="0" Nullable="false" />
-          <Property Name="NUMORDRE" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="NUMORDRE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="CODEHOTEL" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="IDCATEGORIE" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IDDATEARRIVEENUITEE" Type="number" Precision="3" Scale="0" Nullable="false" />
@@ -79,7 +79,7 @@
             <PropertyRef Name="IDRESTAURATION" />
             <PropertyRef Name="IDLICENCIE" />
           </Key>
-          <Property Name="IDRESTAURATION" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="IDRESTAURATION" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="IDLICENCIE" Type="number" Precision="4" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="INSCRIRE">
@@ -192,7 +192,7 @@ avertissement 6002: La table/vue 'MDLEF.PARAMETRES' n'a pas de clé primaire dé
           <Key>
             <PropertyRef Name="IDRESTAURATION" />
           </Key>
-          <Property Name="IDRESTAURATION" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="IDRESTAURATION" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="DATERESTAURATION" Type="date" Nullable="false" />
           <Property Name="TYPEREPAS" Type="char" MaxLength="4" Nullable="false" />
         </EntityType>
@@ -257,7 +257,7 @@ avertissement 6002: La table/vue 'MDLEF.VRESTAURATION01' n'a pas de clé primair
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="LIBELLE" Type="varchar2" MaxLength="83" />
         </EntityType>
         <Association Name="FK_BENEVOLE_PARTICIPANT">
@@ -760,7 +760,7 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
             <PropertyRef Name="NUMORDRE" />
           </Key>
           <Property Name="IDPARTICIPANT" Type="Int16" Nullable="false" />
-          <Property Name="NUMORDRE" Type="Boolean" Nullable="false" />
+          <Property Name="NUMORDRE" Type="Int16" Nullable="false" />
           <Property Name="CODEHOTEL" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="IDCATEGORIE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="IDDATEARRIVEENUITEE" Type="Byte" Nullable="false" />
@@ -902,7 +902,7 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
           <Key>
             <PropertyRef Name="IDRESTAURATION" />
           </Key>
-          <Property Name="IDRESTAURATION" Type="Boolean" Nullable="false" />
+          <Property Name="IDRESTAURATION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="DATERESTAURATION" Type="DateTime" Nullable="false" />
           <Property Name="TYPEREPAS" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="LICENCIEs" Relationship="Self.INCLUREACCOMPAGNANT" FromRole="RESTAURATION" ToRole="LICENCIE" />
@@ -963,6 +963,36 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
           <Property Name="TARIFREPASACCOMPAGNANT" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="DUREE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NBATELIERMAX" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VCATEGORIECHAMBRE01">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="LIBELLE" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LIBELLE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VDATENUITE01">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="LIBELLE" Type="String" MaxLength="77" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VHOTEL01">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="LIBELLE" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LIBELLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VRESTAURATION01">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="LIBELLE" Type="String" MaxLength="83" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_INSCRIRE_ATELIER">
           <End Role="ATELIER" Type="Self.ATELIER" Multiplicity="1">
@@ -1220,7 +1250,7 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
           <End Role="LICENCIE" Type="Self.LICENCIE" Multiplicity="*" />
           <End Role="RESTAURATION" Type="Self.RESTAURATION" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="M2LEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="M2LEntitie" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATELIERs" EntityType="Self.ATELIER" />
           <EntitySet Name="BENEVOLEs" EntityType="Self.BENEVOLE" />
           <EntitySet Name="CATEGORIECHAMBREs" EntityType="Self.CATEGORIECHAMBRE" />
@@ -1241,6 +1271,10 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
           <EntitySet Name="THEMEs" EntityType="Self.THEME" />
           <EntitySet Name="VACATIONs" EntityType="Self.VACATION" />
           <EntitySet Name="PARAMETRES" EntityType="Self.PARAMETRE" />
+          <EntitySet Name="VCATEGORIECHAMBRE01" EntityType="Self.VCATEGORIECHAMBRE01" />
+          <EntitySet Name="VDATENUITE01" EntityType="Self.VDATENUITE01" />
+          <EntitySet Name="VHOTEL01" EntityType="Self.VHOTEL01" />
+          <EntitySet Name="VRESTAURATION01" EntityType="Self.VRESTAURATION01" />
           <AssociationSet Name="FK_INSCRIRE_ATELIER" Association="Self.FK_INSCRIRE_ATELIER">
             <End Role="ATELIER" EntitySet="ATELIERs" />
             <End Role="INSCRIRE" EntitySet="INSCRIREs" />
@@ -1325,47 +1359,13 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
             <End Role="LICENCIE" EntitySet="LICENCIEs" />
             <End Role="RESTAURATION" EntitySet="RESTAURATIONs" />
           </AssociationSet>
-          <EntitySet Name="VCATEGORIECHAMBRE01" EntityType="M2LModel.VCATEGORIECHAMBRE01" />
-          <EntitySet Name="VDATENUITE01" EntityType="M2LModel.VDATENUITE01" />
-          <EntitySet Name="VHOTEL01" EntityType="M2LModel.VHOTEL01" />
-          <EntitySet Name="VRESTAURATION01" EntityType="M2LModel.VRESTAURATION01" />
         </EntityContainer>
-        <EntityType Name="VCATEGORIECHAMBRE01">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="LIBELLE" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="LIBELLE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="VDATENUITE01">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Byte" Nullable="false" />
-          <Property Name="LIBELLE" Type="String" MaxLength="77" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="VHOTEL01">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="LIBELLE" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="LIBELLE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="VRESTAURATION01">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Boolean" Nullable="false" />
-          <Property Name="LIBELLE" Type="String" MaxLength="83" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="M2LModelStoreContainer" CdmEntityContainer="M2LEntities">
+        <EntityContainerMapping StorageEntityContainer="M2LModelStoreContainer" CdmEntityContainer="M2LEntitie">
           <EntitySetMapping Name="ATELIERs">
             <EntityTypeMapping TypeName="M2LModel.ATELIER">
               <MappingFragment StoreEntitySet="ATELIER">
@@ -1568,6 +1568,38 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VCATEGORIECHAMBRE01">
+            <EntityTypeMapping TypeName="M2LModel.VCATEGORIECHAMBRE01">
+              <MappingFragment StoreEntitySet="VCATEGORIECHAMBRE01">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VDATENUITE01">
+            <EntityTypeMapping TypeName="M2LModel.VDATENUITE01">
+              <MappingFragment StoreEntitySet="VDATENUITE01">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VHOTEL01">
+            <EntityTypeMapping TypeName="M2LModel.VHOTEL01">
+              <MappingFragment StoreEntitySet="VHOTEL01">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VRESTAURATION01">
+            <EntityTypeMapping TypeName="M2LModel.VRESTAURATION01">
+              <MappingFragment StoreEntitySet="VRESTAURATION01">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="ETREPRESENT" TypeName="M2LModel.ETREPRESENT" StoreEntitySet="ETREPRESENT">
             <EndProperty Name="BENEVOLE">
               <ScalarProperty Name="IDBENEVOLE" ColumnName="IDBENEVOLE" />
@@ -1584,38 +1616,6 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
               <ScalarProperty Name="IDRESTAURATION" ColumnName="IDRESTAURATION" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="VCATEGORIECHAMBRE01">
-            <EntityTypeMapping TypeName="M2LModel.VCATEGORIECHAMBRE01">
-              <MappingFragment StoreEntitySet="VCATEGORIECHAMBRE01">
-                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VDATENUITE01">
-            <EntityTypeMapping TypeName="M2LModel.VDATENUITE01">
-              <MappingFragment StoreEntitySet="VDATENUITE01">
-                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VHOTEL01">
-            <EntityTypeMapping TypeName="M2LModel.VHOTEL01">
-              <MappingFragment StoreEntitySet="VHOTEL01">
-                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VRESTAURATION01">
-            <EntityTypeMapping TypeName="M2LModel.VRESTAURATION01">
-              <MappingFragment StoreEntitySet="VRESTAURATION01">
-                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

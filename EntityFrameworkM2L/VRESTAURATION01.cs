@@ -14,7 +14,7 @@ namespace EntityFrameworkM2L
     
     public partial class VRESTAURATION01
     {
-        public bool ID { get; set; }
+        public decimal ID { get; set; }
         public string LIBELLE { get; set; }
     }
 }

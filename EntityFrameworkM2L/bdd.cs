@@ -14,10 +14,10 @@ namespace EntityFrameworkM2L
 {
     class bdd
     {
-        private M2LEntities M2LContexte;
+        private M2LEntitie M2LContexte;
         public bdd()
         {
-            M2LContexte = new M2LEntities();
+            M2LContexte = new M2LEntitie();
         }
 
         public DataTable FindAtelier()
@@ -154,12 +154,12 @@ namespace EntityFrameworkM2L
             else return leParticipant.ID += 1;
         }
 
-        public Int16 NewIdPaiement()
+        public int NewIdPaiement()
         {
             var requete = from PAIEMENT in M2LContexte.PAIEMENTs select PAIEMENT;
             var lePaiement = requete.OrderByDescending(c => c.ID).FirstOrDefault();
-            if (lePaiement == null) return 0;
-            else return lePaiement.ID;
+            if (lePaiement == null) return 1;
+            else return lePaiement.ID + 1;
         }
 
         /// <summary>
@@ -190,6 +190,9 @@ namespace EntityFrameworkM2L
             String MessageErreur = "";
             try
             {
+                short idPaye = Convert.ToInt16(this.NewIdPaiement());
+                short id = this.NewId();
+                M2LEntitie m2L = new M2LEntitie();
                 PARTICIPANT unNouveauParticipant = new PARTICIPANT();
                 unNouveauParticipant.NOMPARTICIPANT = pNom;
                 unNouveauParticipant.PRENOMPARTICIPANT = pPrenom;
@@ -200,61 +203,76 @@ namespace EntityFrameworkM2L
                 unNouveauParticipant.TELPARTICIPANT = pTel;
                 unNouveauParticipant.MAILPARTICIPANT = pMail;
                 unNouveauParticipant.DATEINSCRIPTION = DateTime.Now;
-                int id = this.NewId();
-                while(unNouveauParticipant.ID<=id)unNouveauParticipant.ID += 1;
-                //LICENCIE unLicencie = new LICENCIE();
-                //unLicencie.IDQUALITE = Convert.ToByte(pQualité);
-                //unLicencie.NUMEROLICENCE = Convert.ToInt64(pLicence);
+                unNouveauParticipant.ID = id;
 
-                //foreach (Int16 unAtelier in pLesAteliers)
-                //{
-                //    INSCRIRE uneInscription = new INSCRIRE();
-                //    uneInscription.IDATELIER = unAtelier;
-                //    unLicencie.INSCRIREs.Add(uneInscription);
-                //}
+                LICENCIE unLicencie = new LICENCIE();
+                unLicencie.IDQUALITE = Convert.ToByte(pQualité);
+                unLicencie.NUMEROLICENCE = Convert.ToInt64(pLicence);
+                unLicencie.IDLICENCIE = id;
 
-                //RESTAURATION rESTAURATION = new RESTAURATION();
-                //rESTAURATION.IDRESTAURATION = true;
-                //var uneRestauration = M2LContexte.RESTAURATIONs.Find(true);
-                //rESTAURATION.DATERESTAURATION = uneRestauration.DATERESTAURATION;
-                //rESTAURATION.TYPEREPAS = uneRestauration.TYPEREPAS;
-                //unLicencie.RESTAURATIONs.Add(rESTAURATION);
+                foreach (Int16 unAtelier in pLesAteliers)
+                {
+                    INSCRIRE uneInscription = new INSCRIRE();
+                    uneInscription.IDPARTICIPANT = id;
+                    uneInscription.IDATELIER = unAtelier;
+                    unLicencie.INSCRIREs.Add(uneInscription);
+                }
 
-                //foreach (string uneCategorie in pLesCategories)
-                //{
-                //    CONTENUHEBERGEMENT hebergement = new CONTENUHEBERGEMENT();
-                //    hebergement.NUMORDRE = true;
-                //    hebergement.IDCATEGORIE = uneCategorie;
-                //    hebergement.IDDATEARRIVEENUITEE = Convert.ToByte(pLesNuits[pLesCategories.IndexOf(uneCategorie)]);
-                //    hebergement.CODEHOTEL = pLesHotels[pLesCategories.IndexOf(uneCategorie)];
-                //    unNouveauParticipant.CONTENUHEBERGEMENTs.Add(hebergement);
-                //}
+                
 
-                //if (pTypePayement == "Tout")
-                //{
-                //    PAIEMENT unPaiement = new PAIEMENT();
-                //    unPaiement.MONTANTCHEQUE = pMontantChèque;
-                //    unPaiement.NUMEROCHEQUE = pNumCheque;
-                //    unPaiement.TYPEPAIEMENT = "Tout";
-                //    unLicencie.PAIEMENTs.Add(unPaiement);
-                //}
-                //else
-                //{
-                //    PAIEMENT unPaiement = new PAIEMENT();
-                //    unPaiement.MONTANTCHEQUE = pMontantChèque;
-                //    unPaiement.NUMEROCHEQUE = pNumCheque;
-                //    unPaiement.TYPEPAIEMENT = "Insc";
+                foreach (Int16 unRepas in pListeRepas)
+                {
+                    var uneRestauration = m2L.RESTAURATIONs.Find(unRepas);
+                    unLicencie.RESTAURATIONs.Add(uneRestauration);
+                }
 
-                //    PAIEMENT unAutrePaiement = new PAIEMENT();
-                //    unPaiement.MONTANTCHEQUE = pMontantChèque2;
-                //    unPaiement.NUMEROCHEQUE = pNumCheque2;
-                //    unPaiement.TYPEPAIEMENT = "Acco";
-                //    unLicencie.PAIEMENTs.Add(unPaiement);
-                //    unLicencie.PAIEMENTs.Add(unAutrePaiement);
-                //}
-                //unNouveauParticipant.LICENCIE = unLicencie;
-                M2LContexte.PARTICIPANTs.Add(unNouveauParticipant);
-                M2LContexte.SaveChanges();
+                short ordre = 1;
+                for (int i = 0; i < pLesCategories.Count; i++)
+                {
+                    CONTENUHEBERGEMENT hebergement = new CONTENUHEBERGEMENT();
+                    hebergement.IDPARTICIPANT = id;
+                    hebergement.NUMORDRE = ordre;
+                    hebergement.IDCATEGORIE = pLesCategories[i];
+                    hebergement.IDDATEARRIVEENUITEE = Convert.ToByte(pLesNuits[i]);
+                    hebergement.CODEHOTEL = pLesHotels[i];
+                    unNouveauParticipant.CONTENUHEBERGEMENTs.Add(hebergement);
+                    ordre++;
+                }
+
+                if (pTypePayement == "Tout")
+                {
+                    PAIEMENT unPaiement = new PAIEMENT();
+                    unPaiement.ID = idPaye;
+                    unPaiement.IDLICENCIE = id;
+                    unPaiement.MONTANTCHEQUE = pMontantChèque;
+                    unPaiement.NUMEROCHEQUE = pNumCheque;
+                    unPaiement.TYPEPAIEMENT = "Tout";
+                    unLicencie.PAIEMENTs.Add(unPaiement);
+                }
+                else
+                {
+                    PAIEMENT unPaiement = new PAIEMENT();
+                    unPaiement.ID = idPaye;
+                    unPaiement.IDLICENCIE = id;
+                    unPaiement.MONTANTCHEQUE = pMontantChèque;
+                    unPaiement.NUMEROCHEQUE = pNumCheque;
+                    unPaiement.TYPEPAIEMENT = "Insc";
+
+                    idPaye++;
+                    PAIEMENT unAutrePaiement = new PAIEMENT();
+                    unAutrePaiement.ID = idPaye;
+                    unAutrePaiement.IDLICENCIE = id;
+                    unAutrePaiement.MONTANTCHEQUE = pMontantChèque2;
+                    unAutrePaiement.NUMEROCHEQUE = pNumCheque2;
+                    unAutrePaiement.TYPEPAIEMENT = "Acco";
+
+                    unLicencie.PAIEMENTs.Add(unPaiement);
+                    unLicencie.PAIEMENTs.Add(unAutrePaiement);
+                }
+                unNouveauParticipant.LICENCIE = unLicencie;
+                m2L.PARTICIPANTs.Add(unNouveauParticipant);
+                m2L.SaveChanges();
+                m2L.Dispose();
             }
             catch (Exception ex)
             {

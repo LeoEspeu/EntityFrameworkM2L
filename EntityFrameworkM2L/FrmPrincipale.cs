@@ -125,6 +125,7 @@ namespace EntityFrameworkM2L
                 {
                     AteliersSelectionnes.Add(Convert.ToInt16((LsbAtelierLicencie.SelectedIndices[i]) + 1));
                 }
+                if (AteliersSelectionnes.Count == 0) throw new Exception("Vous devez sélectionner au moins un atelier");
                 Int64? NumeroLicence;
                 if (MskLicenceLicencie.MaskCompleted)
                 {
@@ -139,13 +140,16 @@ namespace EntityFrameworkM2L
                 Collection<String> HotelsSelectionnes = new Collection<string>();
                 Collection<String> CategoriesSelectionnees = new Collection<string>();
 
-                foreach (Control UnControle in PanNuiteLicencie.Controls)
+                if (RdbNuiteLicencieOui.Checked)
                 {
-                    if (UnControle.GetType().Name == "ResaNuite" && ((ResaNuite)UnControle).GetNuitSelectionnee())
+                    foreach (Control UnControle in PanNuiteLicencie.Controls)
                     {
-                        CategoriesSelectionnees.Add(((ResaNuite)UnControle).GetTypeChambreSelectionnee());
-                        HotelsSelectionnes.Add(((ResaNuite)UnControle).GetHotelSelectionne());
-                        NuitsSelectionnes.Add(((ResaNuite)UnControle).IdNuite);
+                        if (UnControle.GetType().Name == "ResaNuite" && ((ResaNuite)UnControle).GetNuitSelectionnee())
+                        {
+                            CategoriesSelectionnees.Add(((ResaNuite)UnControle).GetTypeChambreSelectionnee());
+                            HotelsSelectionnes.Add(((ResaNuite)UnControle).GetHotelSelectionne());
+                            NuitsSelectionnes.Add(((ResaNuite)UnControle).IdNuite);
+                        }
                     }
                 }
                 if (NuitsSelectionnes.Count == 0 && RdbNuiteLicencieOui.Checked)
@@ -153,12 +157,14 @@ namespace EntityFrameworkM2L
                     throw new Exception("Si vous avez sélectionné que l'accompagnant avait des nuitées,\n il faut qu'au moins une nuit soit sélectionnée");
                 }
 
-                foreach (Control UnControle in PanRepasLicencie.Controls)
+                if (RdbAccompagnantLicencieOui.Checked)
                 {
-                    if (UnControle.GetType().Name == "MaterialCheckBox" && ((CheckBox)UnControle).Checked)
+                    foreach (Control UnControle in PanRepasLicencie.Controls)
                     {
-                        //RepasSelectionnes.Add(System.Convert.ToInt16((UnControle.Name.Split('_'))[1]));
-                        RepasSelectionnes.Add(1);
+                        if (UnControle.GetType().Name == "MaterialCheckBox" && ((CheckBox)UnControle).Checked)
+                        {
+                            RepasSelectionnes.Add(System.Convert.ToInt16((UnControle.Name.Split('_'))[1]));
+                        }
                     }
                 }
                if (RepasSelectionnes.Count == 0 && RdbAccompagnantLicencieOui.Checked)
@@ -171,14 +177,16 @@ namespace EntityFrameworkM2L
                     Mcheque2 = Convert.ToDecimal(TxtMontantCheque2.Text);
                     TypePayement = "Insc";
                 }
-                if (RepasSelectionnes.Count != 0 || (NuitsSelectionnes.Count != 0))
+                if (RepasSelectionnes.Count != 0 && Ncheque2 !=0)
                 {
-                    UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes, Ncheque2, Mcheque2);
+                    if (Utilitaire.EstPayable(TxtMontantCheque.Text, TxtMontantCheque2.Text, TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes))
+                        UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes, Ncheque2, Mcheque2);
                     MessageBox.Show("Inscription licencié terminée");
                 }
                 else
                 {
-                    UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes);
+                    if (Utilitaire.EstPayable(TxtMontantCheque.Text,"0", TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes))
+                        UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes);
                     MessageBox.Show("Inscription licencié terminée");
                 }
             }

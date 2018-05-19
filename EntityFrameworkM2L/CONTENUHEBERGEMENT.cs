@@ -15,7 +15,7 @@ namespace EntityFrameworkM2L
     public partial class CONTENUHEBERGEMENT
     {
         public short IDPARTICIPANT { get; set; }
-        public bool NUMORDRE { get; set; }
+        public short NUMORDRE { get; set; }
         public string CODEHOTEL { get; set; }
         public string IDCATEGORIE { get; set; }
         public byte IDDATEARRIVEENUITEE { get; set; }
