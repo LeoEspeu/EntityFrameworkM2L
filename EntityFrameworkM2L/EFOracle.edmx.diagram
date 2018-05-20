@@ -50,6 +50,7 @@
         <AssociationConnector Association="M2LModel.FK_PARTICIPER_VACATION" ManuallyRouted="false" />
         <AssociationConnector Association="M2LModel.ETREPRESENT" ManuallyRouted="false" />
         <AssociationConnector Association="M2LModel.INCLUREACCOMPAGNANT" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="M2LModel.VINSCRIT01" Width="1.5" PointX="10.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

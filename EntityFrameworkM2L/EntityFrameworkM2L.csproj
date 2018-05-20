@@ -162,6 +162,9 @@
     <Compile Include="VHOTEL01.cs">
       <DependentUpon>EFOracle.tt</DependentUpon>
     </Compile>
+    <Compile Include="VINSCRIT01.cs">
+      <DependentUpon>EFOracle.tt</DependentUpon>
+    </Compile>
     <Compile Include="VRESTAURATION01.cs">
       <DependentUpon>EFOracle.tt</DependentUpon>
     </Compile>

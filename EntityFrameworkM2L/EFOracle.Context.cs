@@ -49,5 +49,6 @@ namespace EntityFrameworkM2L
         public virtual DbSet<VDATENUITE01> VDATENUITE01 { get; set; }
         public virtual DbSet<VHOTEL01> VHOTEL01 { get; set; }
         public virtual DbSet<VRESTAURATION01> VRESTAURATION01 { get; set; }
+        public virtual DbSet<VINSCRIT01> VINSCRIT01 { get; set; }
     }
 }

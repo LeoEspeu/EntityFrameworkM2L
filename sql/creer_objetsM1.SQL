@@ -759,6 +759,11 @@ create or replace view VCATEGORIECHAMBRE01 as
 select id , libellecategorie as libelle
 from categoriechambre;
 
+-- 
+-- Cette vue VINSCRIT01 va permettre de savoir les inscrits par atelier
+create or replace view VINSCRIT01 as select atelier.id,(NBPLACESMAXI-count(idatelier)) as nbPlacesDispo,libelleatelier
+from inscrire right join atelier on atelier.ID=inscrire.IDATELIER group by atelier.id,nbplacesmaxi,atelier.LIBELLEATELIER order by atelier.id;
+
 -- -----------------------------------------------------------------------------
 --                FIN DE GENERATION
 -- -----------------------------------------------------------------------------

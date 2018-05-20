@@ -17,7 +17,11 @@ namespace EntityFrameworkM2L
     public partial class FrmPrincipale : MaterialForm
     {
         private bdd UneConnexion;
+        public static Exception ExceptionPayement;
 
+        /// <summary>
+        /// On crée le formulaire d'inscription et on remplie les objets graphiques
+        /// </summary>
         public FrmPrincipale()
         {
             InitializeComponent();
@@ -116,16 +120,18 @@ namespace EntityFrameworkM2L
 
             //On recolte les atelier selectionnés
             Collection<Int16> AteliersSelectionnes = new Collection<Int16>();
+            Collection<ListBox.SelectedObjectCollection> Atelier = new Collection<ListBox.SelectedObjectCollection>();
             String TypePayement = "Tout";
             Int16 Ncheque2 = 0;
             Decimal Mcheque2 = 0;
             try
             {
-                for (int i = 0; i < LsbAtelierLicencie.SelectedIndices.Count; i++)
+                foreach (DataRowView unAtelier in LsbAtelierLicencie.SelectedItems)
                 {
-                    AteliersSelectionnes.Add(Convert.ToInt16((LsbAtelierLicencie.SelectedIndices[i]) + 1));
+                    AteliersSelectionnes.Add(Convert.ToInt16(unAtelier.Row.ItemArray[0]));
                 }
                 if (AteliersSelectionnes.Count == 0) throw new Exception("Vous devez sélectionner au moins un atelier");
+                Utilitaire.controleAtelier(AteliersSelectionnes,UneConnexion);
                 Int64? NumeroLicence;
                 if (MskLicenceLicencie.MaskCompleted)
                 {
@@ -179,14 +185,14 @@ namespace EntityFrameworkM2L
                 }
                 if (RepasSelectionnes.Count != 0 && Ncheque2 !=0)
                 {
-                    if (Utilitaire.EstPayable(TxtMontantCheque.Text, TxtMontantCheque2.Text, TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes))
-                        UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes, Ncheque2, Mcheque2);
+                    if (Utilitaire.EstPayable(TxtMontantCheque.Text, TxtMontantCheque2.Text, TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes)) UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes, Ncheque2, Mcheque2);
+                    else throw ExceptionPayement;
                     MessageBox.Show("Inscription licencié terminée");
                 }
                 else
                 {
-                    if (Utilitaire.EstPayable(TxtMontantCheque.Text,"0", TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes))
-                        UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes);
+                    if (Utilitaire.EstPayable(TxtMontantCheque.Text,"0", TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes))UneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, NumeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), AteliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), TypePayement, RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes);
+                    else throw ExceptionPayement;
                     MessageBox.Show("Inscription licencié terminée");
                 }
             }

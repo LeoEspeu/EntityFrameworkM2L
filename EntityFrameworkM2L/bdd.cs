@@ -12,14 +12,25 @@ using System.Text.RegularExpressions;
 
 namespace EntityFrameworkM2L
 {
-    class bdd
+    public class bdd
     {
+        /// <summary>
+        /// Objet Etity Framework
+        /// </summary>
         private M2LEntitie M2LContexte;
+
+        /// <summary>
+        /// Constructeur de la classe bdd
+        /// </summary>
         public bdd()
         {
             M2LContexte = new M2LEntitie();
         }
 
+        /// <summary>
+        /// Fonctions permettant de retourner tous les ateliers de la conventions
+        /// </summary>
+        /// <returns>DataTable contenant la liste des ateliers</returns>
         public DataTable FindAtelier()
         {
             var requete = from ATELIER in M2LContexte.ATELIERs select ATELIER;
@@ -37,6 +48,10 @@ namespace EntityFrameworkM2L
             return table;
         }
 
+        /// <summary>
+        /// Fonctions permettant de retourner tous les types de qualités d'un licencié
+        /// </summary>
+        /// <returns>DataTable contenant la liste des qualités</returns>
         public DataTable FindQualite()
         {
             var requete = from QUALITE in M2LContexte.QUALITEs select QUALITE;
@@ -54,19 +69,33 @@ namespace EntityFrameworkM2L
             return table;
         }
 
-        public object FindNbParAtelier()
+        /// <summary>
+        /// Fonctions retournant le nombre de places disponibles par atelier
+        /// </summary>
+        /// <returns>DataTable contenant la liste des ateliers avec le nombre de places disponibles</returns>
+        public DataTable FindNbParAtelier()
         {
-            var requete = from atelier in M2LContexte.INSCRIREs
-                          group atelier by atelier.IDATELIER into groupeParticipant
-                          select new
-                          {
-                              Atelier = groupeParticipant.Key,
-                              Nombre = groupeParticipant.Count()
-                          };
-            var NbParticipantAtelier = requete.OrderBy(atelier => atelier.Atelier).ToList();
-            return NbParticipantAtelier;
+            var requete = from VINSCRIT01 in M2LContexte.VINSCRIT01 select VINSCRIT01;
+            var lesInscrits = requete.ToList();
+            DataTable table = new DataTable();
+            table.Columns.Add("id");
+            table.Columns.Add("nombre");
+            table.Columns.Add("libelle");
+            foreach (var uneListe in lesInscrits)
+            {
+                DataRow toInsert = table.NewRow();
+                toInsert[0] = uneListe.ID;
+                toInsert[1] = uneListe.NBPLACESDISPO;
+                toInsert[2] = uneListe.LIBELLEATELIER;
+                table.Rows.Add(toInsert);
+            }
+            return table;
         }
 
+        /// <summary>
+        /// Fonctions permettant de retourner les dates de restauration de la convention
+        /// </summary>
+        /// <returns>DataTable contenant la liste des restaurations</returns>
         public DataTable FindRestauration()
         {
             var requete = from VRESTAURATION01 in M2LContexte.VRESTAURATION01 select VRESTAURATION01;
@@ -84,6 +113,10 @@ namespace EntityFrameworkM2L
             return table;
         }
 
+        /// <summary>
+        /// Fonctions permettant de retourner les hotels disponibles pour les nuités de la convention
+        /// </summary>
+        /// <returns>DataTable contenant la liste des hotels</returns>
         public DataTable FindHotel()
         {
             var requete = from VHOTEL01 in M2LContexte.VHOTEL01 select VHOTEL01;
@@ -101,6 +134,10 @@ namespace EntityFrameworkM2L
             return table;
         }
 
+        /// <summary>
+        /// Fonctions permettant de retourner les catégories de chambre des hotels
+        /// </summary>
+        /// <returns>DataTable contenant la liste des catégories de chambre</returns>
         public DataTable FindCategorie()
         {
             var requete = from VCATEGORIECHAMBRE01 in M2LContexte.VCATEGORIECHAMBRE01 select VCATEGORIECHAMBRE01;
@@ -118,6 +155,10 @@ namespace EntityFrameworkM2L
             return table;
         }
 
+        /// <summary>
+        /// Fonctions permettant de retourner les dates de nuités de la convention
+        /// </summary>
+        /// <returns>DataTable contenant la liste des dates de nuités</returns>
         public DataTable FindDateNuitee()
         {
             var requete = from VDATENUITE01 in M2LContexte.VDATENUITE01 select VDATENUITE01;
@@ -135,6 +176,10 @@ namespace EntityFrameworkM2L
             return table;
         }
 
+        /// <summary>
+        /// Fonctions permettant de retourner les dates de nuités de la convention
+        /// </summary>
+        /// <returns>Collection contenant la liste des dates de nuités</returns>
         public Dictionary<Int16, String> ObtenirDatesNuites()
         {
             Dictionary<Int16, String> LesDatesARetourner = new Dictionary<Int16, String>();
@@ -146,6 +191,10 @@ namespace EntityFrameworkM2L
             return LesDatesARetourner;
         }
 
+        /// <summary>
+        /// Fonctions permettant de retourner une valeur pour l'id d'un nouveau participant (cette fonction fait office de séquence pour la table participant)
+        /// </summary>
+        /// <returns>Nouvelle id du participant</returns>
         public Int16 NewId()
         {
             var requete = from PARTICIPANT in M2LContexte.PARTICIPANTs select PARTICIPANT;
@@ -154,6 +203,10 @@ namespace EntityFrameworkM2L
             else return leParticipant.ID += 1;
         }
 
+        /// <summary>
+        /// Fonctions permettant de retourner une valeur pour l'id d'un nouveau paiement (cette fonction fait office de séquence pour la table paiement)
+        /// </summary>
+        /// <returns>Nouvelle id du paiement</returns>
         public int NewIdPaiement()
         {
             var requete = from PAIEMENT in M2LContexte.PAIEMENTs select PAIEMENT;
@@ -288,6 +341,9 @@ namespace EntityFrameworkM2L
             }
         }
 
+        /// <summary>
+        /// Procédure pour détruire l'objet courant Entity Framework
+        /// </summary>
         public void FermerConnexion()
         {
             M2LContexte.Dispose();

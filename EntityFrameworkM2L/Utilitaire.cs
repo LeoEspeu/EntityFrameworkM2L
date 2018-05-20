@@ -13,8 +13,15 @@ using MaterialSkin.Controls;
 
 namespace EntityFrameworkM2L
 {
-    internal abstract class Utilitaire
+    public abstract class Utilitaire
     {
+        /// <summary>
+        /// méthode permettant de remplir une combobox à partir d'une source de données
+        /// </summary>
+        /// <param name="UneConnexion">L'objet connexion à utiliser pour la connexion à la BD</param>
+        /// <param name="UneCombo"> La combobox que l'on doit remplir</param>
+        /// <param name="UneSource">Le nom de la source de données qui va fournir les données. Il s'agit en fait d'une vue de type
+        /// VXXXXOn ou XXXX représente le nom de la tabl à partir de laquelle la vue est créée. n représente un numéro de séquence</param>
         public static void RemplirComboBox(DataTable SourceRemplissage, ComboBox UneCombo)
         {
             UneCombo.DataSource = SourceRemplissage;
@@ -22,6 +29,12 @@ namespace EntityFrameworkM2L
             UneCombo.ValueMember = "id";
         }
 
+        /// <summary>
+        /// méthode permettant de remplir une ListBox à partir d'une source de données
+        /// </summary>
+        /// <param name="UneConnexion"></param>
+        /// <param name="UneList"></param>
+        /// <param name="UneSource"></param>
         public static void RemplirListBox(DataTable SourceRemplissage, ListBox UneList)
         {
             UneList.DataSource = SourceRemplissage;
@@ -29,6 +42,20 @@ namespace EntityFrameworkM2L
             UneList.ValueMember = "id";
         }
 
+        /// <summary>
+        /// Cette méthode crée des controles de type chckbox ou radio button dans un controle de type panel.
+        /// Elle va chercher les données dans la base de données et crée autant de controles (les uns au dessous des autres
+        /// qu'il y a de lignes renvoyées par la base de données.
+        /// </summary>
+        /// <param name="UneForme">Le formulaire concerné</param> 
+        /// <param name="UneConnexion">L'objet connexion à utiliser pour la connexion à la BD</param> 
+        /// <param name="pUneTable">Le nom de la source de données qui va fournir les données. Il s'agit en fait d'une vue de type
+        /// VXXXXOn ou XXXX représente le nom de la tabl à partir de laquelle la vue est créée. n représente un numéro de séquence</param>  
+        /// <param name="pPrefixe">les noms des controles sont standard : NomControle_XX
+        ///                                         ou XX estl'id de l'enregistrement récupéré dans la vue qui
+        ///                                         sert de source de données</param>
+        /// <param name="UnPanel">panel ou groupbox dans lequel on va créer les controles</param>
+        /// <param name="unTypeControle">type de controle à créer : checkbox ou radiobutton</param>
         public static void CreerDesControles(Form UneForme, bdd UneConnexion, String pUneTable, String pPrefixe, ScrollableControl UnPanel, String unTypeControle)
         {
             DataTable UneTable = new DataTable();
@@ -60,6 +87,18 @@ namespace EntityFrameworkM2L
             UnPanel.Height = 20 * i + 5;
         }
 
+        /// <summary>
+        /// Cette méthode permet de renseigner les propriétés des contrôles à créer. C'est une partie commune aux 
+        /// 3 types de participants : intervenant, licencié, bénévole
+        /// </summary>
+        /// <param name="UneForme">le formulaire concerné</param>  
+        /// <param name="UnContainer">le panel ou le groupbox dans lequel on va placer les controles</param> 
+        /// <param name="UnControleAPlacer"> le controle en cours de création</param>
+        /// <param name="UnPrefixe">les noms des controles sont standard : NomControle_XX
+        ///                                         ou XX estl'id de l'enregistrement récupéré dans la vue qui
+        ///                                         sert de siurce de données</param> 
+        /// <param name="UneLigne">un enregistrement de la vue, celle pour laquelle on crée le contrôle</param> 
+        /// <param name="i"> Un compteur qui sert à positionner en hauteur le controle</param>   
         private static void AffecterControle(Form UneForme, ScrollableControl UnContainer, ButtonBase UnControleAPlacer, String UnPrefixe, DataRow UneLigne, Int16 i)
         {
             UnControleAPlacer.Name = UnPrefixe + UneLigne[0];
@@ -93,7 +132,7 @@ namespace EntityFrameworkM2L
                     {
                         String pBody = "";
                         pBody = "\nMontant du chèque 1 insuffisant ,il manque " + Convert.ToString((100 - (Convert.ToDecimal(pMontantCheque1)))) + " euros.";
-                        throw new Exception(pBody);
+                        FrmPrincipale.ExceptionPayement = new Exception(pBody);
                     }
                     return Convert.ToDecimal(pMontantCheque1) >= 100;
                 }
@@ -133,7 +172,7 @@ namespace EntityFrameworkM2L
                     {
                         String pBody = "";
                         pBody = "\nMontant du chèque 1 insuffisant ,il manque " + Convert.ToString((pMontantDu - (Convert.ToDecimal(pMontantCheque1)))) + " euros.";
-                        throw new Exception(pBody);
+                        FrmPrincipale.ExceptionPayement = new Exception(pBody);
                     }
                     return Convert.ToDecimal(pMontantCheque1) >= pMontantDu;
                 }
@@ -176,9 +215,55 @@ namespace EntityFrameworkM2L
                     String pBody = "";
                     if (!(Convert.ToDecimal(pMontantCheque1) >= pMontantDu)) pBody = "\nMontant du chèque 1 insuffisant ,il manque " + Convert.ToString((pMontantDu - (Convert.ToDecimal(pMontantCheque1)))) + " euros.";
                     if (!(Convert.ToDecimal(pMontantCheque2) >= pMontantDuRepas)) pBody += "\nMontant du chèque 2 insuffisant ,il manque " + Convert.ToString((pMontantDu - (Convert.ToDecimal(pMontantCheque2)))) + " euros.";
-                    throw new Exception(pBody);
+                    FrmPrincipale.ExceptionPayement = new Exception(pBody);
                 }
                 return Convert.ToDecimal(pMontantCheque1) >= pMontantDu && Convert.ToDecimal(pMontantCheque2) >= pMontantDuRepas;
+            }
+        }
+
+        /// <summary>
+        /// Procédure qui modifie la liste des ateliers choisis par le participant en fonction des places disponibles par atelier
+        /// </summary>
+        /// <param name="pAteliersSelectionnes">Les ateliers sélectionés par le participant</param>
+        public static void controleAtelier(Collection<Int16> pAteliersSelectionnes,bdd uneConnexion)
+        {
+            String BodyMail = "";
+            DataTable nbInscrits = uneConnexion.FindNbParAtelier();
+            Collection<Int16> atelierASuprimmer = new Collection<Int16>();
+            Collection<Int16> atelierAAjouter = new Collection<Int16>();
+            String atelierSuppr = "";
+            String atelierAjouté = "";
+            foreach (Int16 id in pAteliersSelectionnes)
+            {
+                foreach (DataRow atelier in nbInscrits.Rows)
+                {
+                    if (Convert.ToInt16(atelier[0]) == id && !(Convert.ToInt16(atelier[1]) > 0))
+                    {
+                        atelierASuprimmer.Add(id);
+                        atelierSuppr += " " + atelier[2] + ";";
+                    }
+                }
+            }
+            if (atelierASuprimmer.Count > 0)
+            {
+                foreach (Int16 suppr in atelierASuprimmer)
+                {
+                    pAteliersSelectionnes.RemoveAt(pAteliersSelectionnes.IndexOf(suppr));
+                }
+                int compteur = atelierASuprimmer.Count;
+                foreach (DataRow atelier in nbInscrits.Rows)
+                {
+                    if (compteur > 0 && Convert.ToInt16(atelier[1]) > 0 && !pAteliersSelectionnes.Contains(Convert.ToInt16(atelier[0])))
+                    {
+                        pAteliersSelectionnes.Add(Convert.ToInt16(atelier[0]));
+                        compteur -= 1;
+                        atelierAjouté += " " + atelier[2] + ";";
+                    }
+                }
+                BodyMail = "Malheuresement pour cause de surréservation, nous ne pouvons vous inscrire pour les/l' atelier(s) " + atelierSuppr;
+                if (atelierAjouté != "") BodyMail += "vous êtes reportés sur les/l' atelier(s) " + atelierAjouté;
+                BodyMail += "Veuillez nous en excusez.";
+                MessageBox.Show(BodyMail);
             }
         }
     }

@@ -252,6 +252,17 @@ avertissement 6002: La table/vue 'MDLEF.VHOTEL01' n'a pas de clé primaire défi
           <Property Name="LIBELLE" Type="varchar2" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'MDLEF.VINSCRIT01' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VINSCRIT01">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="LIBELLEATELIER" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="NBPLACESDISPO" Type="number" Precision="38" Scale="0" />
+          <Property Name="LIBELLEATELIER" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
 avertissement 6002: La table/vue 'MDLEF.VRESTAURATION01' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="VRESTAURATION01">
           <Key>
@@ -619,6 +630,13 @@ FROM "MDLEF"."VDATENUITE01" "VDATENUITE01"</DefiningQuery>
 "VHOTEL01"."ID" AS "ID", 
 "VHOTEL01"."LIBELLE" AS "LIBELLE"
 FROM "MDLEF"."VHOTEL01" "VHOTEL01"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VINSCRIT01" EntityType="Self.VINSCRIT01" store:Type="Views" store:Schema="MDLEF">
+            <DefiningQuery>SELECT 
+"VINSCRIT01"."ID" AS "ID", 
+"VINSCRIT01"."NBPLACESDISPO" AS "NBPLACESDISPO", 
+"VINSCRIT01"."LIBELLEATELIER" AS "LIBELLEATELIER"
+FROM "MDLEF"."VINSCRIT01" "VINSCRIT01"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VRESTAURATION01" EntityType="Self.VRESTAURATION01" store:Type="Views" store:Schema="MDLEF">
             <DefiningQuery>SELECT 
@@ -1359,7 +1377,17 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
             <End Role="LICENCIE" EntitySet="LICENCIEs" />
             <End Role="RESTAURATION" EntitySet="RESTAURATIONs" />
           </AssociationSet>
+          <EntitySet Name="VINSCRIT01" EntityType="M2LModel.VINSCRIT01" />
         </EntityContainer>
+        <EntityType Name="VINSCRIT01">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="LIBELLEATELIER" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" />
+          <Property Name="NBPLACESDISPO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="LIBELLEATELIER" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1616,6 +1644,15 @@ FROM "MDLEF"."VRESTAURATION01" "VRESTAURATION01"</DefiningQuery>
               <ScalarProperty Name="IDRESTAURATION" ColumnName="IDRESTAURATION" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="VINSCRIT01">
+            <EntityTypeMapping TypeName="M2LModel.VINSCRIT01">
+              <MappingFragment StoreEntitySet="VINSCRIT01">
+                <ScalarProperty Name="LIBELLEATELIER" ColumnName="LIBELLEATELIER" />
+                <ScalarProperty Name="NBPLACESDISPO" ColumnName="NBPLACESDISPO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
