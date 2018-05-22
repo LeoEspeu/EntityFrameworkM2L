@@ -12,23 +12,23 @@ using System.Text.RegularExpressions;
 
 namespace EntityFrameworkM2L
 {
-    public class bdd
+    public class Bdd
     {
         /// <summary>
-        /// Objet Etity Framework
+        /// Objet Entity Framework.
         /// </summary>
         private M2LEntitie M2LContexte;
 
         /// <summary>
-        /// Constructeur de la classe bdd
+        /// Constructeur de la classe Bdd.
         /// </summary>
-        public bdd()
+        public Bdd()
         {
             M2LContexte = new M2LEntitie();
         }
 
         /// <summary>
-        /// Fonctions permettant de retourner tous les ateliers de la conventions
+        /// Fonction permettant de retourner tous les ateliers de la convention.
         /// </summary>
         /// <returns>DataTable contenant la liste des ateliers</returns>
         public DataTable FindAtelier()
@@ -49,7 +49,7 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Fonctions permettant de retourner tous les types de qualités d'un licencié
+        /// Fonction permettant de retourner tous les types de qualité d'un licencié.
         /// </summary>
         /// <returns>DataTable contenant la liste des qualités</returns>
         public DataTable FindQualite()
@@ -70,7 +70,7 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Fonctions retournant le nombre de places disponibles par atelier
+        /// Fonction retournant le nombre de places disponibles par atelier.
         /// </summary>
         /// <returns>DataTable contenant la liste des ateliers avec le nombre de places disponibles</returns>
         public DataTable FindNbParAtelier()
@@ -93,17 +93,17 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Fonctions permettant de retourner les dates de restauration de la convention
+        /// Fonction permettant de retourner les dates de restauration de la convention.
         /// </summary>
         /// <returns>DataTable contenant la liste des restaurations</returns>
         public DataTable FindRestauration()
         {
             var requete = from VRESTAURATION01 in M2LContexte.VRESTAURATION01 select VRESTAURATION01;
-            var LesRestaurations = requete.ToList();
+            var lesRestaurations = requete.ToList();
             DataTable table = new DataTable();
             table.Columns.Add("id");
             table.Columns.Add("libelle");
-            foreach (var uneRestauration in LesRestaurations)
+            foreach (var uneRestauration in lesRestaurations)
             {
                 DataRow toInsert = table.NewRow();
                 toInsert[0] = uneRestauration.ID;
@@ -114,17 +114,17 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Fonctions permettant de retourner les hotels disponibles pour les nuités de la convention
+        /// Fonction permettant de retourner les hotels disponibles pour les nuités de la convention.
         /// </summary>
         /// <returns>DataTable contenant la liste des hotels</returns>
         public DataTable FindHotel()
         {
             var requete = from VHOTEL01 in M2LContexte.VHOTEL01 select VHOTEL01;
-            var LesHotels = requete.ToList();
+            var lesHotels = requete.ToList();
             DataTable table = new DataTable();
             table.Columns.Add("id");
             table.Columns.Add("libelle");
-            foreach (var unHotel in LesHotels)
+            foreach (var unHotel in lesHotels)
             {
                 DataRow toInsert = table.NewRow();
                 toInsert[0] = unHotel.ID;
@@ -135,17 +135,17 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Fonctions permettant de retourner les catégories de chambre des hotels
+        /// Fonctions permettant de retourner les catégories de chambre des hôtels.
         /// </summary>
         /// <returns>DataTable contenant la liste des catégories de chambre</returns>
         public DataTable FindCategorie()
         {
             var requete = from VCATEGORIECHAMBRE01 in M2LContexte.VCATEGORIECHAMBRE01 select VCATEGORIECHAMBRE01;
-            var LesCategories = requete.ToList();
+            var lesCategories = requete.ToList();
             DataTable table = new DataTable();
             table.Columns.Add("id");
             table.Columns.Add("libelle");
-            foreach (var uneCategorie in LesCategories)
+            foreach (var uneCategorie in lesCategories)
             {
                 DataRow toInsert = table.NewRow();
                 toInsert[0] = uneCategorie.ID;
@@ -156,17 +156,17 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Fonctions permettant de retourner les dates de nuités de la convention
+        /// Fonction permettant de retourner les dates de nuités de la convention.
         /// </summary>
         /// <returns>DataTable contenant la liste des dates de nuités</returns>
         public DataTable FindDateNuitee()
         {
             var requete = from VDATENUITE01 in M2LContexte.VDATENUITE01 select VDATENUITE01;
-            var LesNuits = requete.ToList();
+            var lesNuits = requete.ToList();
             DataTable table = new DataTable();
             table.Columns.Add("id");
             table.Columns.Add("libelle");
-            foreach (var uneNuit in LesNuits)
+            foreach (var uneNuit in lesNuits)
             {
                 DataRow toInsert = table.NewRow();
                 toInsert[0] = uneNuit.ID;
@@ -177,7 +177,7 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Fonctions permettant de retourner les dates de nuités de la convention
+        /// Fonction permettant de retourner les dates de nuités de la convention.
         /// </summary>
         /// <returns>Collection contenant la liste des dates de nuités</returns>
         public Dictionary<Int16, String> ObtenirDatesNuites()
@@ -192,9 +192,9 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Fonctions permettant de retourner une valeur pour l'id d'un nouveau participant (cette fonction fait office de séquence pour la table participant)
+        /// Fonction permettant de retourner une valeur pour l'ID d'un nouveau participant (cette fonction fait office de séquence pour la table participant).
         /// </summary>
-        /// <returns>Nouvelle id du participant</returns>
+        /// <returns>Nouvel ID du participant</returns>
         public Int16 NewId()
         {
             var requete = from PARTICIPANT in M2LContexte.PARTICIPANTs select PARTICIPANT;
@@ -204,7 +204,7 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Fonctions permettant de retourner une valeur pour l'id d'un nouveau paiement (cette fonction fait office de séquence pour la table paiement)
+        /// Fonction permettant de retourner une valeur pour l'ID d'un nouveau paiement (cette fonction fait office de séquence pour la table paiement).
         /// </summary>
         /// <returns>Nouvelle id du paiement</returns>
         public int NewIdPaiement()
@@ -216,31 +216,31 @@ namespace EntityFrameworkM2L
         }
 
         /// <summary>
-        /// Procédure pour inscrire un licencié avec repas et/ou nuits d'hotel
+        /// Procédure pour inscrire un licencié avec repas et/ou nuits d'hôtel.
         /// </summary>
-        /// <param name="pNom">nom du participant</param>
-        /// <param name="pPrenom">prénom du participant</param>
-        /// <param name="pAdresse1">adresse1 du participant</param>
-        /// <param name="pAdresse2">adresse2 du participant</param>
-        /// <param name="pCp">cp du participant</param>
-        /// <param name="pVille">ville du participant</param>
-        /// <param name="pTel">téléphone du participant</param>
-        /// <param name="pMail">mail du participant</param>
+        /// <param name="pNom">Nom du participant</param>
+        /// <param name="pPrenom">Prénom du participant</param>
+        /// <param name="pAdresse1">Adresse1 du participant</param>
+        /// <param name="pAdresse2">Adresse2 du participant</param>
+        /// <param name="pCp">CP du participant</param>
+        /// <param name="pVille">Ville du participant</param>
+        /// <param name="pTel">Téléphone du participant</param>
+        /// <param name="pMail">Mail du participant</param>
         /// <param name="pLicence">Numéro de licence du licencié</param>
         /// <param name="pQualité">Qualité du licencié</param>
         /// <param name="pLesAteliers">Liste d'ateliers ou est inscrit le licencié</param>
         /// <param name="pNumCheque">Numéro du chèque</param>
         /// <param name="pMontantChèque">Montant du chèque</param>
-        /// <param name="pTypePayement">Type de payement du licencié (tout ou en 2 chèque)</param>
+        /// <param name="pTypePayement">Type de paiement du licencié (tout ou en 2 chèques)</param>
         /// <param name="pListeRepas">Liste des repas pour l'accompagnant du licencié</param>
-        /// <param name="pLesCategories">tableau contenant la catégorie de chambre pour chaque nuité à réserver</param>
-        /// <param name="pLesHotels">tableau contenant l'hôtel pour chaque nuité à réserver</param>
-        /// <param name="pLesNuits">tableau contenant l'id de la date d'arrivée pour chaque nuité à réserver</param>
+        /// <param name="pLesCategories">Tableau contenant la catégorie de chambre pour chaque nuité à réserver</param>
+        /// <param name="pLesHotels">Tableau contenant l'hôtel pour chaque nuité à réserver</param>
+        /// <param name="pLesNuits">Tableau contenant l'ID de la date d'arrivée pour chaque nuité à réserver</param>
         /// <param name="pNumCheque2">Numéro de chèque 2</param>
         /// <param name="pMontantChèque2">Montant de chèque 2</param>
         public void InscrireLicencie(String pNom, String pPrenom, String pAdresse1, String pAdresse2, String pCp, String pVille, String pTel, String pMail, Int64? pLicence, Int16 pQualité, Collection<Int16> pLesAteliers, Int16 pNumCheque, Decimal pMontantChèque, String pTypePayement, Collection<Int16> pListeRepas, Collection<string> pLesCategories, Collection<string> pLesHotels, Collection<Int16> pLesNuits, Int16 pNumCheque2 = 0, Decimal pMontantChèque2 = 0)
         {
-            String MessageErreur = "";
+            String MessageErreur = String.Empty;
             try
             {
                 short idPaye = Convert.ToInt16(this.NewIdPaiement());
@@ -270,8 +270,6 @@ namespace EntityFrameworkM2L
                     uneInscription.IDATELIER = unAtelier;
                     unLicencie.INSCRIREs.Add(uneInscription);
                 }
-
-                
 
                 foreach (Int16 unRepas in pListeRepas)
                 {
@@ -335,14 +333,14 @@ namespace EntityFrameworkM2L
             {
                 if (MessageErreur.Length > 0)
                 {
-                    // Déclenchement de l'exception
+                    //// Déclenchement de l'exception.
                     throw new Exception(MessageErreur);
                 }
             }
         }
 
         /// <summary>
-        /// Procédure pour détruire l'objet courant Entity Framework
+        /// Procédure pour détruire l'objet courant Entity Framework.
         /// </summary>
         public void FermerConnexion()
         {

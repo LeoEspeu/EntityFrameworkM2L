@@ -67,7 +67,7 @@
             this.GrpNuiteLicencie = new System.Windows.Forms.GroupBox();
             this.RdbNuiteLicencieNon = new MaterialSkin.Controls.MaterialRadioButton();
             this.RdbNuiteLicencieOui = new MaterialSkin.Controls.MaterialRadioButton();
-            this.PanNuiteLicencie = new System.Windows.Forms.Panel();
+            this.PanNuiteeLicencie = new System.Windows.Forms.Panel();
             this.PicAffiche = new System.Windows.Forms.PictureBox();
             this.BtnQuitter = new MaterialSkin.Controls.MaterialRaisedButton();
             this.LsbAtelierLicencie = new System.Windows.Forms.ListBox();
@@ -549,7 +549,7 @@
             // 
             this.GrpNuiteLicencie.Controls.Add(this.RdbNuiteLicencieNon);
             this.GrpNuiteLicencie.Controls.Add(this.RdbNuiteLicencieOui);
-            this.GrpNuiteLicencie.Controls.Add(this.PanNuiteLicencie);
+            this.GrpNuiteLicencie.Controls.Add(this.PanNuiteeLicencie);
             this.GrpNuiteLicencie.Location = new System.Drawing.Point(9, 180);
             this.GrpNuiteLicencie.Name = "GrpNuiteLicencie";
             this.GrpNuiteLicencie.Size = new System.Drawing.Size(507, 199);
@@ -593,13 +593,13 @@
             this.RdbNuiteLicencieOui.UseVisualStyleBackColor = true;
             this.RdbNuiteLicencieOui.CheckedChanged += new System.EventHandler(this.RdbNuiteLicencie_CheckedChanged);
             // 
-            // PanNuiteLicencie
+            // PanNuiteeLicencie
             // 
-            this.PanNuiteLicencie.Location = new System.Drawing.Point(6, 65);
-            this.PanNuiteLicencie.Name = "PanNuiteLicencie";
-            this.PanNuiteLicencie.Size = new System.Drawing.Size(494, 128);
-            this.PanNuiteLicencie.TabIndex = 24;
-            this.PanNuiteLicencie.Visible = false;
+            this.PanNuiteeLicencie.Location = new System.Drawing.Point(6, 65);
+            this.PanNuiteeLicencie.Name = "PanNuiteeLicencie";
+            this.PanNuiteeLicencie.Size = new System.Drawing.Size(494, 128);
+            this.PanNuiteeLicencie.TabIndex = 24;
+            this.PanNuiteeLicencie.Visible = false;
             // 
             // PicAffiche
             // 
@@ -689,7 +689,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.MaskedTextBox MskLicenceLicencie;
         private System.Windows.Forms.GroupBox GrpNuiteLicencie;
-        private System.Windows.Forms.Panel PanNuiteLicencie;
+        private System.Windows.Forms.Panel PanNuiteeLicencie;
         private MaterialSkin.Controls.MaterialSingleLineTextField TxtNumeroCheque;
         private MaterialSkin.Controls.MaterialSingleLineTextField TxtMontantCheque;
         private MaterialSkin.Controls.MaterialSingleLineTextField TxtMontantCheque2;

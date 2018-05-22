@@ -16,89 +16,89 @@ namespace EntityFrameworkM2L.Tests
         [TestMethod()]
         public void EstPasPayableToutTest()
         {
-            Collection<Int16> RepasSelectionnes = new Collection<Int16>();
-            Collection<Int16> NuitsSelectionnes = new Collection<Int16>();
-            Collection<String> HotelsSelectionnes = new Collection<string>();
-            Collection<String> CategoriesSelectionnees = new Collection<string>();
-            HotelsSelectionnes.Add("IBIS");
-            HotelsSelectionnes.Add("NOVO");
-            CategoriesSelectionnees.Add("S");
-            CategoriesSelectionnees.Add("D");
+            Collection<Int16> repasSelectionnes = new Collection<Int16>();
+            Collection<Int16> nuitsSelectionnees = new Collection<Int16>();
+            Collection<String> hotelsSelectionnes = new Collection<string>();
+            Collection<String> categoriesSelectionnees = new Collection<string>();
+            hotelsSelectionnes.Add("IBIS");
+            hotelsSelectionnes.Add("NOVO");
+            categoriesSelectionnees.Add("S");
+            categoriesSelectionnees.Add("D");
             for (Int16 i = 1; i < 4; i++)
             {
-                RepasSelectionnes.Add(i);
+                repasSelectionnes.Add(i);
                 if (i < 3)
                 {
-                    NuitsSelectionnes.Add(i);
+                    nuitsSelectionnees.Add(i);
                 }
             }
-            Assert.AreEqual(false, Utilitaire.EstPayable("200", "500", "Tout", RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes), "Montant insuffisant");
+            Assert.AreEqual(false, Utilitaire.EstPayable("200", "500", "Tout", repasSelectionnes, categoriesSelectionnees, hotelsSelectionnes, nuitsSelectionnees), "Montant insuffisant");
         }
 
         [TestMethod()]
         public void EstPasPayableTest()
         {
-            Collection<Int16> RepasSelectionnes = new Collection<Int16>();
-            Collection<Int16> NuitsSelectionnes = new Collection<Int16>();
-            Collection<String> HotelsSelectionnes = new Collection<string>();
-            Collection<String> CategoriesSelectionnees = new Collection<string>();
-            HotelsSelectionnes.Add("IBIS");
-            HotelsSelectionnes.Add("NOVO");
-            CategoriesSelectionnees.Add("S");
-            CategoriesSelectionnees.Add("D");
+            Collection<Int16> repasSelectionnes = new Collection<Int16>();
+            Collection<Int16> nuitsSelectionnees = new Collection<Int16>();
+            Collection<String> hotelsSelectionnes = new Collection<string>();
+            Collection<String> categoriesSelectionnees = new Collection<string>();
+            hotelsSelectionnes.Add("IBIS");
+            hotelsSelectionnes.Add("NOVO");
+            categoriesSelectionnees.Add("S");
+            categoriesSelectionnees.Add("D");
             for (Int16 i = 1; i < 4; i++)
             {
-                RepasSelectionnes.Add(i);
+                repasSelectionnes.Add(i);
                 if (i < 3)
                 {
-                    NuitsSelectionnes.Add(i);
+                    nuitsSelectionnees.Add(i);
                 }
             }
-            Assert.AreEqual(false, Utilitaire.EstPayable("100", "500", "Insc", RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes), "Montant insuffisant");
+            Assert.AreEqual(false, Utilitaire.EstPayable("100", "500", "Insc", repasSelectionnes, categoriesSelectionnees, hotelsSelectionnes, nuitsSelectionnees), "Montant insuffisant");
         }
 
         [TestMethod()]
         public void EstPayableTest()
         {
-            Collection<Int16> RepasSelectionnes = new Collection<Int16>();
-            Collection<Int16> NuitsSelectionnes = new Collection<Int16>();
-            Collection<String> HotelsSelectionnes = new Collection<string>();
-            Collection<String> CategoriesSelectionnees = new Collection<string>();
-            HotelsSelectionnes.Add("IBIS");
-            HotelsSelectionnes.Add("NOVO");
-            CategoriesSelectionnees.Add("S");
-            CategoriesSelectionnees.Add("D");
+            Collection<Int16> repasSelectionnes = new Collection<Int16>();
+            Collection<Int16> nuitsSelectionnees = new Collection<Int16>();
+            Collection<String> hotelsSelectionnes = new Collection<string>();
+            Collection<String> categoriesSelectionnees = new Collection<string>();
+            hotelsSelectionnes.Add("IBIS");
+            hotelsSelectionnes.Add("NOVO");
+            categoriesSelectionnees.Add("S");
+            categoriesSelectionnees.Add("D");
             for (Int16 i = 1; i < 4; i++)
             {
-                RepasSelectionnes.Add(i);
+                repasSelectionnes.Add(i);
                 if (i < 3)
                 {
-                    NuitsSelectionnes.Add(i);
+                    nuitsSelectionnees.Add(i);
                 }
             }
-            Assert.AreEqual(true, Utilitaire.EstPayable("400", "500", "Insc", RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes), "Montant insuffisant");
+            Assert.AreEqual(true, Utilitaire.EstPayable("400", "500", "Insc", repasSelectionnes, categoriesSelectionnees, hotelsSelectionnes, nuitsSelectionnees), "Montant insuffisant");
         }
 
         [TestMethod()]
         public void EstPayableToutTest()
         {
-            Collection<Int16> RepasSelectionnes = new Collection<Int16>();
-            Collection<Int16> NuitsSelectionnes = new Collection<Int16>();
-            Collection<String> HotelsSelectionnes = new Collection<string>();
-            Collection<String> CategoriesSelectionnees = new Collection<string>();
-            HotelsSelectionnes.Add("IBIS");
-            HotelsSelectionnes.Add("NOVO");
-            CategoriesSelectionnees.Add("S");
-            CategoriesSelectionnees.Add("D");
+            Collection<Int16> repasSelectionnes = new Collection<Int16>();
+            Collection<Int16> nuitsSelectionnees = new Collection<Int16>();
+            Collection<String> hotelsSelectionnes = new Collection<string>();
+            Collection<String> categoriesSelectionnees = new Collection<string>();
+            hotelsSelectionnes.Add("IBIS");
+            hotelsSelectionnes.Add("NOVO");
+            categoriesSelectionnees.Add("S");
+            categoriesSelectionnees.Add("D");
             for (Int16 i = 1; i < 4; i++)
             {
-                RepasSelectionnes.Add(i);
+                repasSelectionnes.Add(i);
                 if (i < 3)
                 {
-                    NuitsSelectionnes.Add(i);
+                    nuitsSelectionnees.Add(i);
                 }
             }
-            Assert.AreEqual(true, Utilitaire.EstPayable("400", "500", "Tout", RepasSelectionnes, CategoriesSelectionnees, HotelsSelectionnes, NuitsSelectionnes), "Montant insuffisant");
+            Assert.AreEqual(true, Utilitaire.EstPayable("400", "500", "Tout", repasSelectionnes, categoriesSelectionnees, hotelsSelectionnes, nuitsSelectionnees), "Montant insuffisant");
         }
     }
 }
