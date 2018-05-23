@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="FrmPrincipale.cs" company="Maison des Ligues de Lorraine">
+// Copyright (c) Maison des Ligues de Lorraine. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,6 +18,9 @@ using ComposantNuite;
 
 namespace EntityFrameworkM2L
 {
+    /// <summary>
+    /// Classe FrmPrincipale.
+    /// </summary>
     public partial class FrmPrincipale : MaterialForm
     {
         private Bdd uneConnexion;
@@ -59,8 +66,8 @@ namespace EntityFrameworkM2L
         /// <summary>
         /// Procédure qui gère la visibilité des contrôles du panel de choix de repas pour accompagnant de licencié.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Premier paramètre par défaut.</param>
+        /// <param name="e">Deuxième paramètre par défaut.</param>
         private void RdbRepasLicencie_CheckedChanged(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Name == "RdbAccompagnantLicencieOui")
@@ -82,8 +89,8 @@ namespace EntityFrameworkM2L
         /// S'il faut rendre visible le Panel, on teste si les nuitées possibles ont été chargées dans ce Panel. Si non, on les charge. 
         /// On charge ici autant de contrôles ResaNuit qu'il y a de nuits possibles.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Premier paramètre par défaut.</param>
+        /// <param name="e">Deuxième paramètre par défaut.</param>
         private void RdbNuiteLicencie_CheckedChanged(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Name == "RdbNuiteLicencieOui")
@@ -113,17 +120,17 @@ namespace EntityFrameworkM2L
         /// Permet d'intercepter le click sur le bouton d'enregistrement d'un licencié.
         /// Cette méthode va appeler la méthode InscrireLicencie de la Bdd, après avoir mis en forme certains paramètres à envoyer.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Premier paramètre par défaut.</param>
+        /// <param name="e">Deuxième paramètre par défaut.</param>
         private void BtnEnregistrerLicencie_Click(object sender, EventArgs e)
         {
 
             //// On récolte les ateliers selectionnés.
-            Collection<Int16> ateliersSelectionnes = new Collection<Int16>();
+            Collection<short> ateliersSelectionnes = new Collection<short>();
             Collection<ListBox.SelectedObjectCollection> atelier = new Collection<ListBox.SelectedObjectCollection>();
-            String typePaiement = "Tout";
-            Int16 nCheque2 = 0;
-            Decimal mCheque2 = 0;
+            string typePaiement = "Tout";
+            short nCheque2 = 0;
+            decimal mCheque2 = 0;
             try
             {
                 foreach (DataRowView unAtelier in LsbAtelierLicencie.SelectedItems)
@@ -132,7 +139,7 @@ namespace EntityFrameworkM2L
                 }
                 if (ateliersSelectionnes.Count == 0) throw new Exception("Vous devez sélectionner au moins un atelier.");
                 Utilitaire.ControleAtelier(ateliersSelectionnes, uneConnexion);
-                Int64? numeroLicence;
+                long? numeroLicence;
                 if (MskLicenceLicencie.MaskCompleted)
                 {
                     numeroLicence = System.Convert.ToInt64(MskLicenceLicencie.Text);
@@ -141,10 +148,10 @@ namespace EntityFrameworkM2L
                 {
                     throw new Exception("Licence non complétée");
                 }
-                Collection<Int16> repasSelectionnes = new Collection<Int16>();
-                Collection<Int16> nuitsSelectionnees = new Collection<Int16>();
-                Collection<String> hotelsSelectionnes = new Collection<string>();
-                Collection<String> categoriesSelectionnees = new Collection<string>();
+                Collection<short> repasSelectionnes = new Collection<short>();
+                Collection<short> nuitsSelectionnees = new Collection<short>();
+                Collection<string> hotelsSelectionnes = new Collection<string>();
+                Collection<string> categoriesSelectionnees = new Collection<string>();
 
                 if (RdbNuiteLicencieOui.Checked)
                 {
@@ -180,7 +187,7 @@ namespace EntityFrameworkM2L
                     throw new Exception("Si vous avez sélectionné que l'accompagnant avait des repas\n il faut qu'au moins un repas soit sélectionné.");
                 }
 
-                if (TxtMontantCheque2.Text != "" && TxtNumeroCheque2.Text != "" && repasSelectionnes.Count() != 0)
+                if (TxtMontantCheque2.Text != String.Empty && TxtNumeroCheque2.Text != String.Empty && repasSelectionnes.Count() != 0)
                 {
                     nCheque2 = Convert.ToInt16(TxtNumeroCheque2.Text);
                     mCheque2 = Convert.ToDecimal(TxtMontantCheque2.Text);
@@ -195,7 +202,7 @@ namespace EntityFrameworkM2L
                 }
                 else
                 {
-                    if (Utilitaire.EstPayable(TxtMontantCheque.Text,"0", typePaiement, repasSelectionnes, categoriesSelectionnees, hotelsSelectionnes, nuitsSelectionnees))uneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, numeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), ateliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), typePaiement, repasSelectionnes, categoriesSelectionnees, hotelsSelectionnes, nuitsSelectionnees);
+                    if (Utilitaire.EstPayable(TxtMontantCheque.Text, "0", typePaiement, repasSelectionnes, categoriesSelectionnees, hotelsSelectionnes, nuitsSelectionnees))uneConnexion.InscrireLicencie(TxtNom.Text, TxtPrenom.Text, TxtAdr1.Text, TxtAdr2.Text != "" ? TxtAdr2.Text : null, TxtCp.Text, TxtVille.Text, txtTel.MaskCompleted ? txtTel.Text : null, TxtMail.Text != "" ? TxtMail.Text : null, numeroLicence, Convert.ToInt16(CmbQualiteLicenciee.SelectedValue), ateliersSelectionnes, Convert.ToInt16(TxtNumeroCheque.Text), Convert.ToDecimal(TxtMontantCheque.Text), typePaiement, repasSelectionnes, categoriesSelectionnees, hotelsSelectionnes, nuitsSelectionnees);
                     else throw ExceptionPayement;
                     MessageBox.Show("Inscription licencié terminée");
                 }

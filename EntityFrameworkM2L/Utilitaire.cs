@@ -1,18 +1,24 @@
-﻿using System;
+﻿// <copyright file="Utilitaire.cs" company="Maison des Ligues de Lorraine">
+// Copyright (c) Maison des Ligues de Lorraine. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
-using System.Reflection;
 using MaterialSkin;
 using MaterialSkin.Controls;
 
-
 namespace EntityFrameworkM2L
 {
+    /// <summary>
+    /// Classe Utilitaire.
+    /// </summary>
     public abstract class Utilitaire
     {
         /// <summary>
@@ -20,11 +26,9 @@ namespace EntityFrameworkM2L
         /// </summary>
         /// <param name="UneConnexion">L'objet connexion à utiliser pour la connexion à la BD</param>
         /// <param name="UneCombo"> La ComboBox que l'on doit remplir</param>
-        /// <param name="UneSource">Le nom de la source de données qui va fournir les données. Il s'agit en fait d'une vue de type
-        /// VXXXXOn ou XXXX représente le nom de la table à partir de laquelle la vue est créée. n représente un numéro de séquence</param>
-        public static void RemplirComboBox(DataTable SourceRemplissage, ComboBox UneCombo)
+        public static void RemplirComboBox(DataTable sourceRemplissage, ComboBox UneCombo)
         {
-            UneCombo.DataSource = SourceRemplissage;
+            UneCombo.DataSource = sourceRemplissage;
             UneCombo.DisplayMember = "libelle";
             UneCombo.ValueMember = "id";
         }
@@ -47,8 +51,8 @@ namespace EntityFrameworkM2L
         /// Elle va chercher les données dans la base de données et crée autant de contrôles (les uns en-dessous des autres)
         /// qu'il y a de lignes renvoyées par la base de données.
         /// </summary>
-        /// <param name="UneForme">Le formulaire concerné</param> 
-        /// <param name="UneConnexion">L'objet connexion à utiliser pour la connexion à la BD</param> 
+        /// <param name="unForm">Le formulaire concerné</param> 
+        /// <param name="uneConnexion">L'objet connexion à utiliser pour la connexion à la BD</param> 
         /// <param name="pUneTable">Le nom de la source de données qui va fournir les données. Il s'agit en fait d'une vue de type
         /// VXXXXOn ou XXXX représente le nom de la table à partir de laquelle la vue est créée. n représente un numéro de séquence</param>  
         /// <param name="pPrefixe">les noms des contrôles sont standards : NomControle_XX
@@ -56,34 +60,36 @@ namespace EntityFrameworkM2L
         ///                                         sert de source de données</param>
         /// <param name="UnPanel">Panel ou GroupBox dans lequel on va créer les contrôles</param>
         /// <param name="unTypeControle">Type de contrôle à créer : CheckBox ou RadioButton</param>
-        public static void CreerDesControles(Form UneForme, Bdd UneConnexion, String pUneTable, String pPrefixe, ScrollableControl UnPanel, String unTypeControle)
+        public static void CreerDesControles(Form unForm, Bdd uneConnexion, string pUneTable, string pPrefixe, ScrollableControl UnPanel, string unTypeControle)
         {
-            DataTable UneTable = new DataTable();
+            DataTable uneTable = new DataTable();
             switch (pUneTable)
             {
                 case "restauration":
-                    UneTable = UneConnexion.FindRestauration();
+                    uneTable = uneConnexion.FindRestauration();
                     break;
                 default:
                     throw new Exception("Entité Innexistante");
             }
+
             //// On va récupérer les statuts dans un DataTable puis on va parcourir les lignes (rows) de ce DataTable pour 
             //// construire dynamiquement les boutons radio pour le statut de l'intervenant dans son atelier.
-            Int16 i = 0;
-            foreach (DataRow UneLigne in UneTable.Rows)
+            short i = 0;
+            foreach (DataRow uneLigne in uneTable.Rows)
             {
                 if (unTypeControle == "CheckBox")
                 {
                     MaterialCheckBox UnControle = new MaterialCheckBox();
-                    AffecterControle(UneForme, UnPanel, UnControle, pPrefixe, UneLigne, i++);
+                    AffecterControle(unForm, UnPanel, UnControle, pPrefixe, uneLigne, i++);
                 }
                 else if (unTypeControle == "RadioButton")
                 {
                     MaterialRadioButton UnControle = new MaterialRadioButton();
-                    AffecterControle(UneForme, UnPanel, UnControle, pPrefixe, UneLigne, i++);
+                    AffecterControle(unForm, UnPanel, UnControle, pPrefixe, uneLigne, i++);
                 }
                 i++;
             }
+
             UnPanel.Height = 20 * i + 5;
         }
 
@@ -91,23 +97,23 @@ namespace EntityFrameworkM2L
         /// Cette méthode permet de renseigner les propriétés des contrôles à créer. C'est une partie commune aux 
         /// 3 types de participants : intervenant, licencié, bénévole.
         /// </summary>
-        /// <param name="UneForme">Le formulaire concerné</param>  
+        /// <param name="unForm">Le formulaire concerné</param>  
         /// <param name="UnContainer">Le Panel ou leGgroupBox dans lequel on va placer les contrôles</param> 
         /// <param name="UnControleAPlacer">Le contrôle en cours de création</param>
-        /// <param name="UnPrefixe">Les noms des contrôles sont standards : NomControle_XX
+        /// <param name="unPrefixe">Les noms des contrôles sont standards : NomControle_XX
         ///                                         ou XX est l'ID de l'enregistrement récupéré dans la vue qui
         ///                                         sert de source de données</param> 
-        /// <param name="UneLigne">Un enregistrement de la vue, celle pour laquelle on crée le contrôle</param> 
+        /// <param name="uneLigne">Un enregistrement de la vue, celle pour laquelle on crée le contrôle</param> 
         /// <param name="i">Un compteur qui sert à positionner en hauteur le contrôle</param>   
-        private static void AffecterControle(Form UneForme, ScrollableControl UnContainer, ButtonBase UnControleAPlacer, String UnPrefixe, DataRow UneLigne, Int16 i)
+        private static void AffecterControle(Form unForm, ScrollableControl UnContainer, ButtonBase UnControleAPlacer, string unPrefixe, DataRow uneLigne, short i)
         {
-            UnControleAPlacer.Name = UnPrefixe + UneLigne[0];
+            UnControleAPlacer.Name = unPrefixe + uneLigne[0];
             UnControleAPlacer.Width = 320;
-            UnControleAPlacer.Text = UneLigne[1].ToString();
+            UnControleAPlacer.Text = uneLigne[1].ToString();
             UnControleAPlacer.Left = 13;
             UnControleAPlacer.Top = 5 +(10 * i);
             UnControleAPlacer.Visible = true;                  
-            System.Type UnType = UneForme.GetType();
+            System.Type unType = unForm.GetType();
             UnContainer.Controls.Add(UnControleAPlacer);
         }
 
@@ -116,21 +122,21 @@ namespace EntityFrameworkM2L
         /// </summary>
         /// <param name="pMontantCheque1">Montant du chèque 1</param>
         /// <param name="pMontantCheque2">Montant du chèque 2 (facultatif, si payement en 2 chèques, sinon à 0 par défaut)</param>
-        /// <param name="pTypePayement">Type de paiement choisi (1 chèque/2 chèques)</param>
+        /// <param name="pTypePaiement">Type de paiement choisi (1 chèque/2 chèques)</param>
         /// <param name="pListeRepas">Tableau contenant les repas séletionnés pour chaque accompagnant du licencié</param>
         /// <param name="pCategoriesSelectionnees">Tableau contenant la catégorie de chambre pour chaque nuité à réserver</param>
         /// <param name="pHotelsSelectionnes">Tableau contenant l'hôtel pour chaque nuité à réserver</param>
-        /// <param name="pNuitsSelectionnes">Tableau contenant l'ID de la date d'arrivée pour chaque nuité à réserver</param>
+        /// <param name="pNuitsSelectionnees">Tableau contenant l'ID de la date d'arrivée pour chaque nuité à réserver</param>
         /// <returns></returns>
-        public static Boolean EstPayable(String pMontantCheque1, String pMontantCheque2 = "0", String pTypePayement = "Tout", Collection<Int16> pListeRepas = null, Collection<string> pCategoriesSelectionnees = null, Collection<string> pHotelsSelectionnes = null, Collection<Int16> pNuitsSelectionnes = null)
+        public static bool EstPayable(string pMontantCheque1, string pMontantCheque2 = "0", string pTypePaiement = "Tout", Collection<short> pListeRepas = null, Collection<string> pCategoriesSelectionnees = null, Collection<string> pHotelsSelectionnes = null, Collection<short> pNuitsSelectionnees = null)
         {
-            if (pTypePayement == "Tout")
+            if (pTypePaiement == "Tout")
             {
-                if (pListeRepas == null && pCategoriesSelectionnees == null && pHotelsSelectionnes == null && pNuitsSelectionnes == null)
+                if (pListeRepas == null && pCategoriesSelectionnees == null && pHotelsSelectionnes == null && pNuitsSelectionnees == null)
                 {
                     if (!(Convert.ToDecimal(pMontantCheque1) >= 100))
                     {
-                        String pBody = String.Empty;
+                        string pBody = String.Empty;
                         pBody = "\nMontant du chèque 1 insuffisant, il manque " + Convert.ToString((100 - (Convert.ToDecimal(pMontantCheque1)))) + " euros.";
                         FrmPrincipale.ExceptionPayement = new Exception(pBody);
                     }
@@ -138,85 +144,91 @@ namespace EntityFrameworkM2L
                 }
                 else
                 {
-                    Decimal pMontantDu = 100;
-                    foreach (Int16 uneNuit in pNuitsSelectionnes)
+                    decimal pMontantDu = 100;
+                    foreach (short uneNuit in pNuitsSelectionnees)
                     {
-                        if (pHotelsSelectionnes[pNuitsSelectionnes.IndexOf(uneNuit)] == "IBIS")
+                        if (pHotelsSelectionnes[pNuitsSelectionnees.IndexOf(uneNuit)] == "IBIS")
                         {
-                            if (pCategoriesSelectionnees[pNuitsSelectionnes.IndexOf(uneNuit)] == "S")
+                            if (pCategoriesSelectionnees[pNuitsSelectionnees.IndexOf(uneNuit)] == "S")
                             {
-                                pMontantDu += (Decimal)61.20;
+                                pMontantDu += (decimal)61.20;
                             }
                             else
                             {
-                                pMontantDu += (Decimal)62.20;
+                                pMontantDu += (decimal)62.20;
                             }
                         }
                         else
                         {
-                            if (pCategoriesSelectionnees[pNuitsSelectionnes.IndexOf(uneNuit)] == "S")
+                            if (pCategoriesSelectionnees[pNuitsSelectionnees.IndexOf(uneNuit)] == "S")
                             {
-                                pMontantDu += (Decimal)112;
+                                pMontantDu += (decimal)112;
                             }
                             else
                             {
-                                pMontantDu += (Decimal)122;
+                                pMontantDu += (decimal)122;
                             }
                         }
                     }
-                    foreach (Int16 unRepas in pListeRepas)
+
+                    foreach (short unRepas in pListeRepas)
                     {
-                        pMontantDu += (Decimal)35;
+                        pMontantDu += (decimal)35;
                     }
+
                     if (!(Convert.ToDecimal(pMontantCheque1) >= pMontantDu))
                     {
-                        String pBody = String.Empty;
+                        string pBody = String.Empty;
                         pBody = "\nMontant du chèque 1 insuffisant, il manque " + Convert.ToString((pMontantDu - (Convert.ToDecimal(pMontantCheque1)))) + " euros.";
                         FrmPrincipale.ExceptionPayement = new Exception(pBody);
                     }
+
                     return Convert.ToDecimal(pMontantCheque1) >= pMontantDu;
                 }
             }
             else
             {
-                Decimal pMontantDu = 100;
-                Decimal pMontantDuRepas = 0;
-                foreach (Int16 uneNuit in pNuitsSelectionnes)
+                decimal pMontantDu = 100;
+                decimal pMontantDuRepas = 0;
+                foreach (short uneNuit in pNuitsSelectionnees)
                 {
-                    if (pHotelsSelectionnes[pNuitsSelectionnes.IndexOf(uneNuit)] == "IBIS")
+                    if (pHotelsSelectionnes[pNuitsSelectionnees.IndexOf(uneNuit)] == "IBIS")
                     {
-                        if (pCategoriesSelectionnees[pNuitsSelectionnes.IndexOf(uneNuit)] == "S")
+                        if (pCategoriesSelectionnees[pNuitsSelectionnees.IndexOf(uneNuit)] == "S")
                         {
-                            pMontantDu += (Decimal)61.20;
+                            pMontantDu += (decimal)61.20;
                         }
                         else
                         {
-                            pMontantDu += (Decimal)62.20;
+                            pMontantDu += (decimal)62.20;
                         }
                     }
                     else
                     {
-                        if (pCategoriesSelectionnees[pNuitsSelectionnes.IndexOf(uneNuit)] == "S")
+                        if (pCategoriesSelectionnees[pNuitsSelectionnees.IndexOf(uneNuit)] == "S")
                         {
-                            pMontantDu += (Decimal)112;
+                            pMontantDu += (decimal)112;
                         }
                         else
                         {
-                            pMontantDu += (Decimal)122;
+                            pMontantDu += (decimal)122;
                         }
                     }
                 }
-                foreach (Int16 unRepas in pListeRepas)
+
+                foreach (short unRepas in pListeRepas)
                 {
-                    pMontantDuRepas += (Decimal)35;
+                    pMontantDuRepas += (decimal)35;
                 }
+
                 if (!(Convert.ToDecimal(pMontantCheque1) >= pMontantDu && Convert.ToDecimal(pMontantCheque2) >= pMontantDuRepas))
                 {
-                    String pBody = String.Empty;
+                    string pBody = String.Empty;
                     if (!(Convert.ToDecimal(pMontantCheque1) >= pMontantDu)) pBody = "\nMontant du chèque 1 insuffisant, il manque " + Convert.ToString((pMontantDu - (Convert.ToDecimal(pMontantCheque1)))) + " euros.";
                     if (!(Convert.ToDecimal(pMontantCheque2) >= pMontantDuRepas)) pBody += "\nMontant du chèque 2 insuffisant, il manque " + Convert.ToString((pMontantDu - (Convert.ToDecimal(pMontantCheque2)))) + " euros.";
                     FrmPrincipale.ExceptionPayement = new Exception(pBody);
                 }
+
                 return Convert.ToDecimal(pMontantCheque1) >= pMontantDu && Convert.ToDecimal(pMontantCheque2) >= pMontantDuRepas;
             }
         }
@@ -225,15 +237,15 @@ namespace EntityFrameworkM2L
         /// Procédure qui modifie la liste des ateliers choisis par le participant en fonction des places disponibles par atelier.
         /// </summary>
         /// <param name="pAteliersSelectionnes">Les ateliers sélectionés par le participant</param>
-        public static void ControleAtelier(Collection<Int16> pAteliersSelectionnes, Bdd uneConnexion)
+        public static void ControleAtelier(Collection<short> pAteliersSelectionnes, Bdd uneConnexion)
         {
-            String bodyMail = String.Empty;
+            string bodyMail = String.Empty;
             DataTable nbInscrits = uneConnexion.FindNbParAtelier();
-            Collection<Int16> atelierASuprimmer = new Collection<Int16>();
-            Collection<Int16> atelierAAjouter = new Collection<Int16>();
-            String atelierSuppr = String.Empty;
-            String atelierAjouté = String.Empty;
-            foreach (Int16 id in pAteliersSelectionnes)
+            Collection<short> atelierASuprimmer = new Collection<short>();
+            Collection<short> atelierAAjouter = new Collection<short>();
+            string atelierSuppr = String.Empty;
+            string atelierAjouté = String.Empty;
+            foreach (short id in pAteliersSelectionnes)
             {
                 foreach (DataRow atelier in nbInscrits.Rows)
                 {
@@ -244,9 +256,10 @@ namespace EntityFrameworkM2L
                     }
                 }
             }
+
             if (atelierASuprimmer.Count > 0)
             {
-                foreach (Int16 suppr in atelierASuprimmer)
+                foreach (short suppr in atelierASuprimmer)
                 {
                     pAteliersSelectionnes.RemoveAt(pAteliersSelectionnes.IndexOf(suppr));
                 }
@@ -260,8 +273,13 @@ namespace EntityFrameworkM2L
                         atelierAjouté += " " + atelier[2] + ";";
                     }
                 }
+
                 bodyMail = "Malheuresement pour cause de surréservation, nous ne pouvons vous inscrire pour les/l'atelier(s) " + atelierSuppr;
-                if (atelierAjouté != String.Empty) bodyMail += "vous êtes reportés sur les/l'atelier(s) " + atelierAjouté;
+                if (atelierAjouté != String.Empty)
+                {
+                    bodyMail += "vous êtes reportés sur les/l'atelier(s) " + atelierAjouté;
+                }
+
                 bodyMail += "Veuillez nous en excusez.";
                 MessageBox.Show(bodyMail);
             }

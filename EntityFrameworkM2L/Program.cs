@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Program.cs" company="Maison des Ligues de Lorraine">
+// Copyright (c) Maison des Ligues de Lorraine. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +10,10 @@ using System.Windows.Forms;
 
 namespace EntityFrameworkM2L
 {
+    /// <summary>
+    /// Classe Program.
+    /// Contient le point d'entrée de l'application.
+    /// </summary>
     static class Program
     {
         /// <summary>

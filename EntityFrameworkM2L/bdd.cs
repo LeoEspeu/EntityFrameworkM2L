@@ -1,14 +1,18 @@
-﻿using System;
-using System.Globalization;
+﻿// <copyright file="Bdd.cs" company="Maison des Ligues de Lorraine">
+// Copyright (c) Maison des Ligues de Lorraine. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Configuration;
+using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.Configuration;
-using System.Windows.Forms;
-using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EntityFrameworkM2L
 {
@@ -45,6 +49,7 @@ namespace EntityFrameworkM2L
                 toInsert[1] = unAtelier.LIBELLEATELIER;
                 table.Rows.Add(toInsert);
             }
+
             return table;
         }
 
@@ -66,6 +71,7 @@ namespace EntityFrameworkM2L
                 toInsert[1] = uneQualite.LIBELLEQUALITE;
                 table.Rows.Add(toInsert);
             }
+
             return table;
         }
 
@@ -89,6 +95,7 @@ namespace EntityFrameworkM2L
                 toInsert[2] = uneListe.LIBELLEATELIER;
                 table.Rows.Add(toInsert);
             }
+
             return table;
         }
 
@@ -110,6 +117,7 @@ namespace EntityFrameworkM2L
                 toInsert[1] = uneRestauration.LIBELLE;
                 table.Rows.Add(toInsert);
             }
+
             return table;
         }
 
@@ -131,6 +139,7 @@ namespace EntityFrameworkM2L
                 toInsert[1] = unHotel.LIBELLE;
                 table.Rows.Add(toInsert);
             }
+
             return table;
         }
 
@@ -152,6 +161,7 @@ namespace EntityFrameworkM2L
                 toInsert[1] = uneCategorie.LIBELLE;
                 table.Rows.Add(toInsert);
             }
+
             return table;
         }
 
@@ -173,6 +183,7 @@ namespace EntityFrameworkM2L
                 toInsert[1] = uneNuit.LIBELLE;
                 table.Rows.Add(toInsert);
             }
+
             return table;
         }
 
@@ -180,14 +191,15 @@ namespace EntityFrameworkM2L
         /// Fonction permettant de retourner les dates de nuités de la convention.
         /// </summary>
         /// <returns>Collection contenant la liste des dates de nuités</returns>
-        public Dictionary<Int16, String> ObtenirDatesNuites()
+        public Dictionary<short, string> ObtenirDatesNuites()
         {
-            Dictionary<Int16, String> LesDatesARetourner = new Dictionary<Int16, String>();
+            Dictionary<short, string> LesDatesARetourner = new Dictionary<short, string>();
             DataTable LesDatesNuites = this.FindDateNuitee();
             foreach (DataRow UneLigne in LesDatesNuites.Rows)
             {
                 LesDatesARetourner.Add(System.Convert.ToInt16(UneLigne["id"]), UneLigne["libelle"].ToString());
             }
+
             return LesDatesARetourner;
         }
 
@@ -195,7 +207,7 @@ namespace EntityFrameworkM2L
         /// Fonction permettant de retourner une valeur pour l'ID d'un nouveau participant (cette fonction fait office de séquence pour la table participant).
         /// </summary>
         /// <returns>Nouvel ID du participant</returns>
-        public Int16 NewId()
+        public short NewId()
         {
             var requete = from PARTICIPANT in M2LContexte.PARTICIPANTs select PARTICIPANT;
             var leParticipant = requete.OrderByDescending(c => c.ID).FirstOrDefault();
@@ -238,9 +250,9 @@ namespace EntityFrameworkM2L
         /// <param name="pLesNuits">Tableau contenant l'ID de la date d'arrivée pour chaque nuité à réserver</param>
         /// <param name="pNumCheque2">Numéro de chèque 2</param>
         /// <param name="pMontantChèque2">Montant de chèque 2</param>
-        public void InscrireLicencie(String pNom, String pPrenom, String pAdresse1, String pAdresse2, String pCp, String pVille, String pTel, String pMail, Int64? pLicence, Int16 pQualité, Collection<Int16> pLesAteliers, Int16 pNumCheque, Decimal pMontantChèque, String pTypePayement, Collection<Int16> pListeRepas, Collection<string> pLesCategories, Collection<string> pLesHotels, Collection<Int16> pLesNuits, Int16 pNumCheque2 = 0, Decimal pMontantChèque2 = 0)
+        public void InscrireLicencie(string pNom, string pPrenom, string pAdresse1, string pAdresse2, string pCp, string pVille, string pTel, string pMail, long? pLicence, short pQualité, Collection<short> pLesAteliers, short pNumCheque, decimal pMontantChèque, string pTypePayement, Collection<short> pListeRepas, Collection<string> pLesCategories, Collection<string> pLesHotels, Collection<short> pLesNuits, short pNumCheque2 = 0, decimal pMontantChèque2 = 0)
         {
-            String MessageErreur = String.Empty;
+            string messageErreur = String.Empty;
             try
             {
                 short idPaye = Convert.ToInt16(this.NewIdPaiement());
@@ -263,7 +275,7 @@ namespace EntityFrameworkM2L
                 unLicencie.NUMEROLICENCE = Convert.ToInt64(pLicence);
                 unLicencie.IDLICENCIE = id;
 
-                foreach (Int16 unAtelier in pLesAteliers)
+                foreach (short unAtelier in pLesAteliers)
                 {
                     INSCRIRE uneInscription = new INSCRIRE();
                     uneInscription.IDPARTICIPANT = id;
@@ -271,7 +283,7 @@ namespace EntityFrameworkM2L
                     unLicencie.INSCRIREs.Add(uneInscription);
                 }
 
-                foreach (Int16 unRepas in pListeRepas)
+                foreach (short unRepas in pListeRepas)
                 {
                     var uneRestauration = m2L.RESTAURATIONs.Find(unRepas);
                     unLicencie.RESTAURATIONs.Add(uneRestauration);
@@ -327,14 +339,14 @@ namespace EntityFrameworkM2L
             }
             catch (Exception ex)
             {
-                MessageErreur = ex.Message;
+                messageErreur = ex.Message;
             }
             finally
             {
-                if (MessageErreur.Length > 0)
+                if (messageErreur.Length > 0)
                 {
                     //// Déclenchement de l'exception.
-                    throw new Exception(MessageErreur);
+                    throw new Exception(messageErreur);
                 }
             }
         }
